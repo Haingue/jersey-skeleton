@@ -18,7 +18,14 @@ public class UserAuth {
 	@Consumes("application/json")
 	@Produces("application/json")
 	public Response authUser(User user) {
-		User authUser = null;
+		UserDAO dao = new UserDAO();
+		User authUser = dao.checkUser(user);
+		
+		if(authUser == null) {
+			return Response.status(Response.Status.NOT_FOUND).build();
+		}else {
+			
+		}
 		
 	}
 
