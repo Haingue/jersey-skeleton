@@ -14,8 +14,8 @@ public class UtilisateurDAO {
 		con = new BDDFactory().getConnection();
 	}
 	
-	public List<Utilisateur> getAllUsers() {
-		List<Utilisateur> list = new ArrayList<Utilisateur>();
+	public List<User> getAllUsers() {
+		List<User> list = new ArrayList<User>();
 		//ResultSet rs = sql_Query("Select * from Utilisateur where role = '"+"' ", con);
 		/*try {
 			while (rs.next()) {
@@ -37,7 +37,7 @@ public class UtilisateurDAO {
 		return list;
 	}
 	
-	public Utilisateur checkUser(Utilisateur user) {
+	public User checkUser(User user) {
 		return null;
 	}
 

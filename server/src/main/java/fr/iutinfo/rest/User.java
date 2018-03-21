@@ -1,6 +1,6 @@
 package fr.iutinfo.rest;
 
-public class Utilisateur {
+public class User {
 	
 	private int uno;
 	private String login;
@@ -66,7 +66,7 @@ public class Utilisateur {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Utilisateur other = (Utilisateur) obj;
+		User other = (User) obj;
 		if (fonction == null) {
 			if (other.fonction != null)
 				return false;
