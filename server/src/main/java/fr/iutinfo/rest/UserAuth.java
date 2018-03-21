@@ -16,7 +16,11 @@ public class UserAuth {
 	@Context
 	public UriInfo uriInfo;
 	
-	@GET
+	public UserAuth() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	@POST
 	@Consumes("application/json")
 	@Produces("application/json")
 	public User authUser(User user) {

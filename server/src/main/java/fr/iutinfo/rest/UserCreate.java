@@ -12,10 +12,8 @@ import java.net.URI;
 
 import java.util.*;
 
-@Path("create")
+@Path("register")
 public class UserCreate {
-
-    private static Map<Integer, User> users = new HashMap<>();
 	
     @Context
     public UriInfo uriInfo;
@@ -25,17 +23,15 @@ public class UserCreate {
  
     @POST
     public Response createUser(User user) {
-    
+    	UserDAO dao = new UserDAO();
     	// Si l'utilisateur existe déjà, renvoyer 409
-        if ( users.containsKey(user.getUno()) ) {
+        if ( dao.getUserByLogin(user.getLogin()) == null ) {
             return Response.status(Response.Status.CONFLICT).build();
         }
-        else {
-        	users.put(user.getUno(), user);
-
-            // On renvoie 201 et l'instance de la ressource dans le Header HTTP 'Location'
-            URI instanceURI = uriInfo.getAbsolutePathBuilder().path( String.valueOf(user.getUno()) ).build();
-            return Response.created(instanceURI).build();
+        if(dao.addUser(user) == null) {
+        	return Response.status(Response.Status.BAD_REQUEST).build();
+        }else {
+        	return Response.ok().build();
         }
     
     }
