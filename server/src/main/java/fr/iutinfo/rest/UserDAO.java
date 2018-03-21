@@ -39,8 +39,30 @@ public class UserDAO {
 		return list;
 	}
 
-	public User getUserByLogin(User user) {
-		ResultSet rs = sql_Query("Select * from users where login = '" + user.getLogin() + "'");
+	public User checkUser(User user) {
+		ResultSet rs = sql_Query(
+				"Select * from users where login = '" + user.getLogin() + "' and password = '" + user.getPass() + "'");
+		User tmp = null;
+		try {
+			rs.next();
+			int uno = rs.getInt("pno");
+			String login = rs.getString("login");
+			String passw = rs.getString("password");
+			String nom = rs.getString("nom");
+			String prenom = rs.getString("prenom");
+			String fonct = rs.getString("fonction");
+			int cno = rs.getInt("cno");
+			Corp corp = corpDAO.getCorpById(cno);
+			tmp = new User(uno, login, passw, nom, prenom, fonct, corp);
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return tmp;
+	}
+
+	public User getUserByLogin(String loginUser) {
+		ResultSet rs = sql_Query("Select * from users where login = '" + loginUser + "'");
 		try {
 			rs.next();
 			int uno = rs.getInt("pno");
@@ -106,7 +128,7 @@ public class UserDAO {
 
 	public User addUser(User user) {
 		Corp c = getCorpByDomain(user);
-		if(c == null) {
+		if (c == null) {
 			return null;
 		}
 		String query = "insert into users values (default, '" + user.getLogin() + "', '" + user.getPass() + "', '"
