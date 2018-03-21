@@ -55,6 +55,62 @@ CREATE TABLE event
 	eno INT PRIMARY KEY NOT NULL,
 	event_date DATE NOT NULL, 
 	heure TIME NOT NULL, 
+	participants_needed INT,
+	price INT NOT NULL,
+	rno INT NOT NULL,
+	sno INT NOT NULL,
+
+	CONSTRAINT fk_rno FOREIGN KEY (rno)
+		REFERENCES room(rno),
+
+	CONSTRAINT fk_sno FOREIGN KEY (sno)
+		REFERENCES sport(sno)
+);
+
+CREATE TABLE participant(
+	eno INT NOT NULL,
+	uno int NOT NULL, 
+
+	CONSTRAINT pk_participant PRIMARY KEY (eno,uno),
+	CONSTRAINT fk_eno FOREIGN KEY (eno)
+		REFERENCES event(eno),
+	CONSTRAINT fk_uno FOREIGN KEY (uno)
+		REFERENCES users(uno)
+
+);
+
+CREATE TABLE evaluation(
+	sno INT NOT NULL,
+	uno INT NOT NULL,
+	score INT NOT NULL,
+
+	CONSTRAINT pk_evaluation PRIMARY KEY (uno,sno),
+	CONSTRAINT fk_sno FOREIGN KEY (sno)
+		REFERENCES sport(sno),
+	CONSTRAINT fk_uno FOREIGN KEY (uno)
+		REFERENCES users(uno),
+	CONSTRAINT evaluation_ok CHECK (score>=1 AND score<=10)
+
+);
+
+CREATE TABLE available_sport(
+	sno INT NOT NULL,
+	rno INT NOT NULL,
+
+	CONSTRAINT pk_available_sport PRIMARY KEY (sno,rno),
+	CONSTRAINT fk_sno FOREIGN KEY (sno)
+		REFERENCES sport(sno),
+	CONSTRAINT fk_rno FOREIGN KEY (rno)
+		REFERENCES room(rno)
+
+);
+);
+
+CREATE TABLE event
+(
+	eno INT PRIMARY KEY NOT NULL,
+	event_date DATE NOT NULL, 
+	heure TIME NOT NULL, 
 	nbParticipantsNeeded INT,
 	price INT NOT NULL,
 	rno INT,
