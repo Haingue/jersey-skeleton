@@ -3,53 +3,88 @@ package fr.iutinfo.rest;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.ws.FaultAction;
+
 public class UserDAO {
-	
-	private Connection con;
-	
+
+	private BDDFactory bddFact;
+	private CorpDAO corpDAO;
+
 	public UserDAO() {
-		con = new BDDFactory().getConnection();
+		bddFact = new BDDFactory();
+		corpDAO = new CorpDAO();
 	}
-	
-<<<<<<< HEAD:server/src/main/java/fr/iutinfo/rest/UserDAO.java
-	public List<Utilisateur> getAllUsers() {
-		List<Utilisateur> list = new ArrayList<Utilisateur>();
-		ResultSet rs = sql_Query("Select * from users", con);
-		try {
-=======
+
 	public List<User> getAllUsers() {
 		List<User> list = new ArrayList<User>();
-		//ResultSet rs = sql_Query("Select * from Utilisateur where role = '"+"' ", con);
-		/*try {
->>>>>>> aed32dd6dea8071001f1bf53b081a34108ad1e83:server/src/main/java/fr/iutinfo/rest/UtilisateurDAO.java
+		ResultSet rs = sql_Query("Select * from users");
+		try {
 			while (rs.next()) {
-				int pno = rs.getInt("pno");
+				int uno = rs.getInt("pno");
+				String login = rs.getString("login");
+				String passw = rs.getString("password");
 				String nom = rs.getString("nom");
 				String prenom = rs.getString("prenom");
-				String addr = rs.getString("addresse");
-				String mdp = rs.getString("mdp");
-				list.add(new Utilisateur());
+				String fonct = rs.getString("fonction");
+				int cno = rs.getInt("cno");
+				User user = new User(uno, login, passw, nom, prenom, fonct, null);
+				user.setCorp(corpDAO.getCorpById(cno));
+				list.add(user);
 			}
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
-		try {
-			con.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
 		return list;
 	}
-	
+
 	public User checkUser(User user) {
+		ResultSet rs = sql_Query("Select * from users where uno=" + user.getUno() + "");
+		try {
+			rs.next();
+			int uno = rs.getInt("pno");
+			String login = rs.getString("login");
+			String passw = rs.getString("password");
+			String nom = rs.getString("nom");
+			String prenom = rs.getString("prenom");
+			String fonct = rs.getString("fonction");
+			int cno = rs.getInt("cno");
+			User tmp = new User(uno, login, passw, nom, prenom, fonct, null);
+			tmp.setCorp(corpDAO.getCorpById(cno));
+			return tmp;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
 		return null;
 	}
 	
-	private ResultSet sql_Query(String request, Connection con) {
-		System.out.println("request:\n" + request);
+	public List<User> getUsersByCorpId(int idCorp) {
+		List<User> list = new ArrayList<User>();
+		ResultSet rs = sql_Query("Select * from users where cno ="+idCorp+"");
+		
+		try {
+			while (rs.next()) {
+				int uno = rs.getInt("pno");
+				String login = rs.getString("login");
+				String passw = rs.getString("password");
+				String nom = rs.getString("nom");
+				String prenom = rs.getString("prenom");
+				String fonct = rs.getString("fonction");
+				int cno = rs.getInt("cno");
+				User user = new User(uno, login, passw, nom, prenom, fonct, null);
+				user.setCorp(corpDAO.getCorpById(cno));
+				list.add(user);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return list;
+	}
+	private ResultSet sql_Query(String request) {
+		Connection con = bddFact.getConnection();
 		Statement stmt;
 		ResultSet rs = null;
 		try {
@@ -59,6 +94,12 @@ public class UserDAO {
 			System.out.println(e.getMessage());
 		} catch (Exception er) {
 			System.out.println("Error");
+		}finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return rs;
 	}
