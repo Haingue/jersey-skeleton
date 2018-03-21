@@ -52,7 +52,28 @@ public class UserDAO {
 		}
 		return null;
 	}
-
+	
+	public List<User> getUsersByCorpId(int idCorp) {
+		List<User> list = new ArrayList<User>();
+		ResultSet rs = sql_Query("Select * from users where cno ="+idCorp+"", con);
+		
+		try {
+			while (rs.next()) {
+				int uno = rs.getInt("pno");
+				String login = rs.getString("login");
+				String passw = rs.getString("password");
+				String nom = rs.getString("nom");
+				String prenom = rs.getString("prenom");
+				String fonct = rs.getString("fonction");
+				int cno = rs.getInt("cno");
+				User user = new User(uno, login, passw, nom, prenom, fonct, null);
+				list.add(user);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return list;
+	}
 	private ResultSet sql_Query(String request, Connection con) {
 		Statement stmt;
 		ResultSet rs = null;
