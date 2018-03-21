@@ -15,9 +15,7 @@ public class User {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
-	
-	public User(int uno, String login, String pass, String nom, String prenom, String fonction, Corp corop) {
+	public User(int uno, String login, String pass, String nom, String prenom, String fonction, Corp corp) {
 		super();
 		this.uno = uno;
 		this.login = login;
@@ -28,8 +26,13 @@ public class User {
 		this.corp = corp;
 	}
 
-
-
+	public Corp getCorp() {
+		return corp;
+	}
+	public void setCorp(Corp corp) {
+		this.corp = corp;
+	}
+	
 	public int getUno() {
 		return uno;
 	}
