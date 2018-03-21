@@ -11,7 +11,7 @@ public class CorpDAO {
 		Corp corp = null;
 		Connection con = new BDDFactory().getConnection();
 		try {
-			PreparedStatement ps = con.prepareStatement("SELECT * FROM corp WHERE cno=?");
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM corporate WHERE cno=?");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 
@@ -39,7 +39,7 @@ public class CorpDAO {
 		Corp corp = null;
 		Connection con = new BDDFactory().getConnection();
 		try {
-			PreparedStatement ps = con.prepareStatement("SELECT * FROM corp WHERE domain=?");
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM corporate WHERE domain=?");
 			ps.setString(1, domain);
 			ResultSet rs = ps.executeQuery();
 
