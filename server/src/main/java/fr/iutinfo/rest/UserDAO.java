@@ -7,17 +7,21 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.ws.FaultAction;
+
 public class UserDAO {
 
-	private Connection con;
+	private BDDFactory bddFact;
+	private CorpDAO corpDAO;
 
 	public UserDAO() {
-		con = new BDDFactory().getConnection();
+		bddFact = new BDDFactory();
+		corpDAO = new CorpDAO();
 	}
 
 	public List<User> getAllUsers() {
 		List<User> list = new ArrayList<User>();
-		ResultSet rs = sql_Query("Select * from users", con);
+		ResultSet rs = sql_Query("Select * from users");
 		try {
 			while (rs.next()) {
 				int uno = rs.getInt("pno");
@@ -27,7 +31,9 @@ public class UserDAO {
 				String prenom = rs.getString("prenom");
 				String fonct = rs.getString("fonction");
 				int cno = rs.getInt("cno");
-				list.add(new User(uno, login, passw, nom, prenom, fonct, cno));
+				User user = new User(uno, login, passw, nom, prenom, fonct, null);
+				user.setCorp(corpDAO.getCorpById(cno));
+				list.add(user);
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -46,7 +52,9 @@ public class UserDAO {
 			String prenom = rs.getString("prenom");
 			String fonct = rs.getString("fonction");
 			int cno = rs.getInt("cno");
-			return new User(uno, login, passw, nom, prenom, fonct, cno);
+			User tmp = new User(uno, login, passw, nom, prenom, fonct, null);
+			tmp.setCorp(corpDAO.getCorpById(cno));
+			return tmp;
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -55,7 +63,7 @@ public class UserDAO {
 	
 	public List<User> getUsersByCorpId(int idCorp) {
 		List<User> list = new ArrayList<User>();
-		ResultSet rs = sql_Query("Select * from users where cno ="+idCorp+"", con);
+		ResultSet rs = sql_Query("Select * from users where cno ="+idCorp+"");
 		
 		try {
 			while (rs.next()) {
@@ -67,6 +75,7 @@ public class UserDAO {
 				String fonct = rs.getString("fonction");
 				int cno = rs.getInt("cno");
 				User user = new User(uno, login, passw, nom, prenom, fonct, null);
+				user.setCorp(corpDAO.getCorpById(cno));
 				list.add(user);
 			}
 		} catch (SQLException e) {
@@ -74,7 +83,8 @@ public class UserDAO {
 		}
 		return list;
 	}
-	private ResultSet sql_Query(String request, Connection con) {
+	private ResultSet sql_Query(String request) {
+		Connection con = bddFact.getConnection();
 		Statement stmt;
 		ResultSet rs = null;
 		try {
@@ -84,6 +94,12 @@ public class UserDAO {
 			System.out.println(e.getMessage());
 		} catch (Exception er) {
 			System.out.println("Error");
+		}finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return rs;
 	}
