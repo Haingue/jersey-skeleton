@@ -88,7 +88,8 @@ CREATE TABLE evaluation(
 	CONSTRAINT fk_sno FOREIGN KEY (sno)
 		REFERENCES sport(sno),
 	CONSTRAINT fk_uno FOREIGN KEY (uno)
-		REFERENCES users(uno)
+		REFERENCES users(uno),
+	CONSTRAINT evaluation_ok CHECK (score>=1 AND score<=10)
 
 );
 
