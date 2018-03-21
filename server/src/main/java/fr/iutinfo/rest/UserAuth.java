@@ -2,6 +2,7 @@ package fr.iutinfo.rest;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -18,12 +19,12 @@ public class UserAuth {
 	@GET
 	@Consumes("application/json")
 	@Produces("application/json")
-	public Response authUser(User user) {
+	public User authUser(User user) {
 		UserDAO dao = new UserDAO();
 		User authUser = dao.checkUser(user);
 		
 		if(authUser == null) {
-			return Response.status(Response.Status.NOT_FOUND).build();
+			throw new NotFoundException();
 		}else {
 			return authUser;
 		}

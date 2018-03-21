@@ -34,5 +34,33 @@ public class CorpDAO {
 
 		return corp;
 	}
+	
+	public Corp getCorpByDomainName(String domain) {
+		Corp corp = null;
+		Connection con = new BDDFactory().getConnection();
+		try {
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM corp WHERE domain=?");
+			ps.setString(1, domain);
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				String name = rs.getString("name");
+				int cno = rs.getInt("cno");
+				corp = new Corp(cno, name, domain);
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+			}
+		}
+
+		return corp;
+	}
 
 }
