@@ -8,18 +8,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO {
-	
+
 	private Connection con;
-	
+
 	public UserDAO() {
 		con = new BDDFactory().getConnection();
 	}
-	
+
 	public List<User> getAllUsers() {
 		List<User> list = new ArrayList<User>();
 		ResultSet rs = sql_Query("Select * from users", con);
 		try {
-			while(rs.next()) {
+			while (rs.next()) {
 				int uno = rs.getInt("pno");
 				String login = rs.getString("login");
 				String passw = rs.getString("password");
@@ -27,23 +27,32 @@ public class UserDAO {
 				String prenom = rs.getString("prenom");
 				String fonct = rs.getString("fonction");
 				int cno = rs.getInt("cno");
-				list.add(new User(uno, login, passw, nom, prenom, fonct));
+				list.add(new User(uno, login, passw, nom, prenom, fonct, cno));
 			}
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
-		try {
-			con.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
 		return list;
 	}
-	
+
 	public User checkUser(User user) {
+		ResultSet rs = sql_Query("Select * from users where uno=" + user.getUno() + "", con);
+		try {
+			rs.next();
+			int uno = rs.getInt("pno");
+			String login = rs.getString("login");
+			String passw = rs.getString("password");
+			String nom = rs.getString("nom");
+			String prenom = rs.getString("prenom");
+			String fonct = rs.getString("fonction");
+			int cno = rs.getInt("cno");
+			return new User(uno, login, passw, nom, prenom, fonct, cno);
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
 		return null;
 	}
-	
+
 	private ResultSet sql_Query(String request, Connection con) {
 		Statement stmt;
 		ResultSet rs = null;
