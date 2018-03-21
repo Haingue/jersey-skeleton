@@ -39,8 +39,8 @@ public class UserDAO {
 		return list;
 	}
 
-	public User checkUser(User user) {
-		ResultSet rs = sql_Query("Select * from users where uno=" + user.getUno() + "");
+	public User getUserByLogin(User user) {
+		ResultSet rs = sql_Query("Select * from users where login = '" + user.getLogin() + "'");
 		try {
 			rs.next();
 			int uno = rs.getInt("pno");
