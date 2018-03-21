@@ -7,8 +7,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.ws.FaultAction;
-
 public class UserDAO {
 
 	private BDDFactory bddFact;
@@ -60,11 +58,11 @@ public class UserDAO {
 		}
 		return null;
 	}
-	
+
 	public List<User> getUsersByCorpId(int idCorp) {
 		List<User> list = new ArrayList<User>();
-		ResultSet rs = sql_Query("Select * from users where cno ="+idCorp+"");
-		
+		ResultSet rs = sql_Query("Select * from users where cno =" + idCorp + "");
+
 		try {
 			while (rs.next()) {
 				int uno = rs.getInt("pno");
@@ -83,6 +81,15 @@ public class UserDAO {
 		}
 		return list;
 	}
+
+	public void addUser(User user) {
+		try {
+			String domaine = user.getLogin().split("@")[1];
+		}catch (ArrayIndexOutOfBoundsException e) {
+			
+		}
+	}
+
 	private ResultSet sql_Query(String request) {
 		Connection con = bddFact.getConnection();
 		Statement stmt;
@@ -94,7 +101,7 @@ public class UserDAO {
 			System.out.println(e.getMessage());
 		} catch (Exception er) {
 			System.out.println("Error");
-		}finally {
+		} finally {
 			try {
 				con.close();
 			} catch (SQLException e) {
@@ -102,6 +109,19 @@ public class UserDAO {
 			}
 		}
 		return rs;
+	}
+
+	private void sql_Update(String request) {
+		Connection con = bddFact.getConnection();
+		Statement stmt;
+		try {
+			stmt = con.createStatement();
+			stmt.executeUpdate(request);
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} catch (Exception er) {
+			System.out.println("Error");
+		}
 	}
 
 }
