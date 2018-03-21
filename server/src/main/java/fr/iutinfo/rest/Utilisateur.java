@@ -8,6 +8,8 @@ public class Utilisateur {
 	private String nom;
 	private String prenom;
 	private String fonction;
+	
+	
 	public int getUno() {
 		return uno;
 	}
