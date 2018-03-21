@@ -82,12 +82,47 @@ public class UserDAO {
 		return list;
 	}
 
-	public void addUser(User user) {
+	public User getUserByID(int id) {
+		ResultSet rs = sql_Query("Select * from users where uno =" + id + "");
+
 		try {
-			String domaine = user.getLogin().split("@")[1];
-		}catch (ArrayIndexOutOfBoundsException e) {
-			
+			rs.next();
+			int uno = rs.getInt("pno");
+			String login = rs.getString("login");
+			String passw = rs.getString("password");
+			String nom = rs.getString("nom");
+			String prenom = rs.getString("prenom");
+			String fonct = rs.getString("fonction");
+			int cno = rs.getInt("cno");
+			User user = new User(uno, login, passw, nom, prenom, fonct, null);
+			user.setCorp(corpDAO.getCorpById(cno));
+			return user;
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
 		}
+		return null;
+	}
+
+	public User addUser(User user) {
+		Corp c = getCorpByDomain(user);
+		if(c == null) {
+			return null;
+		}
+		String query = "insert into users values (default, '" + user.getLogin() + "', '" + user.getPass() + "', '"
+				+ user.getNom() + "', '" + user.getPrenom() + "', '" + user.getFonction() + "', " + c.getCno() + " ";
+		System.out.println(query);
+		sql_Update(query);
+		return user;
+	}
+
+	private Corp getCorpByDomain(User user) {
+		String[] tab = user.getLogin().split("@");
+		if (tab.length > 2) {
+			return null;
+		}
+		String domaine = tab[tab.length - 1];
+		return corpDAO.getCorpByDomainName(domaine);
 	}
 
 	private ResultSet sql_Query(String request) {
