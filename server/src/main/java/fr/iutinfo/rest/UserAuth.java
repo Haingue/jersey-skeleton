@@ -14,7 +14,7 @@ public class UserAuth {
 	
 	@POST
 	
-	public Response authUser(Utilisateur user) {
+	public Response authUser(User user) {
 		
 	}
 
