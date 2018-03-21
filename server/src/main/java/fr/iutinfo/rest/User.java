@@ -8,6 +8,7 @@ public class User {
 	private String nom;
 	private String prenom;
 	private String fonction;
+	private Corp corp;
 	
 	
 	public User() {
@@ -16,7 +17,7 @@ public class User {
 	
 	
 	
-	public User(int uno, String login, String pass, String nom, String prenom, String fonction) {
+	public User(int uno, String login, String pass, String nom, String prenom, String fonction, Corp corop) {
 		super();
 		this.uno = uno;
 		this.login = login;
@@ -24,6 +25,7 @@ public class User {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.fonction = fonction;
+		this.corp = corp;
 	}
 
 
@@ -63,6 +65,9 @@ public class User {
 	}
 	public void setFonction(String fonction) {
 		this.fonction = fonction;
+	}
+	public String getCorpName() {
+		return corp.getNom();
 	}
 	@Override
 	public int hashCode() {

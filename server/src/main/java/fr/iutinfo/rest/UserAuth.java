@@ -1,6 +1,7 @@
 package fr.iutinfo.rest;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -14,7 +15,7 @@ public class UserAuth {
 	@Context
 	public UriInfo uriInfo;
 	
-	@POST
+	@GET
 	@Consumes("application/json")
 	@Produces("application/json")
 	public Response authUser(User user) {
@@ -24,7 +25,7 @@ public class UserAuth {
 		if(authUser == null) {
 			return Response.status(Response.Status.NOT_FOUND).build();
 		}else {
-			
+			return authUser;
 		}
 		
 	}
