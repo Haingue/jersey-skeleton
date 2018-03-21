@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS corporate;
 
 CREATE TABLE corporate
 (
-    cno INT PRIMARY KEY NOT NULL,
+    cno SERIAL PRIMARY KEY NOT NULL,
     name VARCHAR(50) NOT NULL,
     domain VARCHAR(50) NOT NULL,
 
@@ -19,7 +19,7 @@ CREATE TABLE corporate
 
 CREATE TABLE users
 (
-	uno INT PRIMARY KEY NOT NULL,
+	uno SERIAL PRIMARY KEY NOT NULL,
 	login VARCHAR(100) NOT NULL,
 	password VARCHAR(50) NOT NULL,
 	nom VARCHAR(50) NOT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE users
 
 CREATE TABLE sport
 (
-	sno INT PRIMARY KEY NOT NULL,
+	sno SERIAL PRIMARY KEY NOT NULL,
 	name VARCHAR(50) NOT NULL,
 
 	CONSTRAINT uniq_sport_name UNIQUE (name)
@@ -44,7 +44,7 @@ CREATE TABLE sport
 
 CREATE TABLE room
 (
-	rno INT PRIMARY KEY NOT NULL,
+	rno SERIAL PRIMARY KEY NOT NULL,
 	name VARCHAR(50) NOT NULL,
 	adress VARCHAR(50) NOT NULL,
 	tel VARCHAR(10) NOT NULL
@@ -52,7 +52,7 @@ CREATE TABLE room
 
 CREATE TABLE event
 (
-	eno INT PRIMARY KEY NOT NULL,
+	eno SERIAL PRIMARY KEY NOT NULL,
 	event_date DATE NOT NULL, 
 	heure TIME NOT NULL, 
 	participants_needed INT,
@@ -96,62 +96,6 @@ CREATE TABLE evaluation(
 CREATE TABLE available_sport(
 	sno INT NOT NULL,
 	rno INT NOT NULL,
-
-	CONSTRAINT pk_available_sport PRIMARY KEY (sno,rno),
-	CONSTRAINT fk_sno FOREIGN KEY (sno)
-		REFERENCES sport(sno),
-	CONSTRAINT fk_rno FOREIGN KEY (rno)
-		REFERENCES room(rno)
-
-);
-);
-
-CREATE TABLE event
-(
-	eno INT PRIMARY KEY NOT NULL,
-	event_date DATE NOT NULL, 
-	heure TIME NOT NULL, 
-	nbParticipantsNeeded INT,
-	price INT NOT NULL,
-	rno INT,
-	sno INT,
-
-	CONSTRAINT fk_rno FOREIGN KEY (rno)
-		REFERENCES room(rno),
-
-	CONSTRAINT fk_sno FOREIGN KEY (sno)
-		REFERENCES sport(sno)
-);
-
-CREATE TABLE participant(
-	eno INT,
-	uno int, 
-
-	CONSTRAINT pk_participant PRIMARY KEY (eno,uno),
-	CONSTRAINT fk_eno FOREIGN KEY (eno)
-		REFERENCES event(eno),
-	CONSTRAINT fk_uno FOREIGN KEY (uno)
-		REFERENCES users(uno)
-
-);
-
-CREATE TABLE evaluation(
-	sno INT,
-	uno INT,
-	score INT,
-
-	CONSTRAINT pk_evaluation PRIMARY KEY (uno,sno),
-	CONSTRAINT fk_sno FOREIGN KEY (sno)
-		REFERENCES sport(sno),
-	CONSTRAINT fk_uno FOREIGN KEY (uno)
-		REFERENCES users(uno),
-	CONSTRAINT evaluation_ok CHECK (score>=1 AND score<=10)
-
-);
-
-CREATE TABLE available_sport(
-	sno INT,
-	rno INT,
 
 	CONSTRAINT pk_available_sport PRIMARY KEY (sno,rno),
 	CONSTRAINT fk_sno FOREIGN KEY (sno)
