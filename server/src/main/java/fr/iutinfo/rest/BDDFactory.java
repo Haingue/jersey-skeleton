@@ -15,7 +15,7 @@ public class BDDFactory {
 			// System.out.println("Driver loaded !");
 			String url = "jdbc:postgresql://psqlserv/n3p1";
 			// port 5432 de la base n3p1
-			String nom = "hainguef";
+			String nom = "parissej";
 			String mdp = "moi";
 			con = DriverManager.getConnection(url, nom, mdp);
 		} catch (SQLException e) {
