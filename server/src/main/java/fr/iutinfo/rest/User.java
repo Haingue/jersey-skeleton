@@ -10,6 +10,24 @@ public class User {
 	private String fonction;
 	
 	
+	public User() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	
+	public User(int uno, String login, String pass, String nom, String prenom, String fonction) {
+		super();
+		this.uno = uno;
+		this.login = login;
+		this.pass = pass;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.fonction = fonction;
+	}
+
+
+
 	public int getUno() {
 		return uno;
 	}
