@@ -3,6 +3,7 @@ package fr.iutinfo.rest;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,24 +15,19 @@ public class UserDAO {
 		con = new BDDFactory().getConnection();
 	}
 	
-<<<<<<< HEAD:server/src/main/java/fr/iutinfo/rest/UserDAO.java
-	public List<Utilisateur> getAllUsers() {
-		List<Utilisateur> list = new ArrayList<Utilisateur>();
-		ResultSet rs = sql_Query("Select * from users", con);
-		try {
-=======
 	public List<User> getAllUsers() {
 		List<User> list = new ArrayList<User>();
-		//ResultSet rs = sql_Query("Select * from Utilisateur where role = '"+"' ", con);
-		/*try {
->>>>>>> aed32dd6dea8071001f1bf53b081a34108ad1e83:server/src/main/java/fr/iutinfo/rest/UtilisateurDAO.java
-			while (rs.next()) {
-				int pno = rs.getInt("pno");
+		ResultSet rs = sql_Query("Select * from users", con);
+		try {
+			while(rs.next()) {
+				int uno = rs.getInt("pno");
+				String login = rs.getString("login");
+				String passw = rs.getString("password");
 				String nom = rs.getString("nom");
 				String prenom = rs.getString("prenom");
-				String addr = rs.getString("addresse");
-				String mdp = rs.getString("mdp");
-				list.add(new Utilisateur());
+				String fonct = rs.getString("fonction");
+				int cno = rs.getInt("cno");
+				list.add(new User(uno, login, passw, nom, prenom, fonct));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -49,7 +45,6 @@ public class UserDAO {
 	}
 	
 	private ResultSet sql_Query(String request, Connection con) {
-		System.out.println("request:\n" + request);
 		Statement stmt;
 		ResultSet rs = null;
 		try {
