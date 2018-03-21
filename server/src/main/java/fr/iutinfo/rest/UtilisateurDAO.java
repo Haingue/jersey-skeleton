@@ -15,9 +15,9 @@ public class UtilisateurDAO {
 	}
 	
 	public List<Utilisateur> getAllUsers() {
-		/*List<Utilisateur> list = new ArrayList<Utilisateur>();
-		ResultSet rs = sql_Query("Select * from Personne where role = '"+"' ", con);
-		try {
+		List<Utilisateur> list = new ArrayList<Utilisateur>();
+		//ResultSet rs = sql_Query("Select * from Utilisateur where role = '"+"' ", con);
+		/*try {
 			while (rs.next()) {
 				int pno = rs.getInt("pno");
 				String nom = rs.getString("nom");
@@ -33,8 +33,12 @@ public class UtilisateurDAO {
 			con.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
-		}
-		return list;*/
+		}*/
+		return list;
+	}
+	
+	public Utilisateur checkUser(Utilisateur user) {
+		return null;
 	}
 
 }
