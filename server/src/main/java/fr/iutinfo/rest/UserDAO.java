@@ -42,7 +42,7 @@ public class UserDAO {
 	}
 
 	public User checkUser(User user) {
-		ResultSet rs = sql_Query("Select * from users where uno=" + user.getUno() + "", con);
+		ResultSet rs = sql_Query("Select * from users where uno=" + user.getUno() + "");
 		try {
 			rs.next();
 			int uno = rs.getInt("pno");
