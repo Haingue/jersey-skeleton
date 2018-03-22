@@ -27,7 +27,7 @@ public class UserTest {
 	public void init() {
 		Client c = ClientBuilder.newClient();
 
-		target = c.target("/v1/");
+		target = c.target("http://localhost:8080/v1");
 	}
 
 	@After
@@ -47,8 +47,8 @@ public class UserTest {
 
 	@Test
 	public void RegisterTest() {
-		/*CorpDAO cDao = BDDFactory.getDbi().open(CorpDAO.class);
-		cDao.insert("Auchan", "auchan.com");
+		CorpDAO cDao = BDDFactory.getDbi().open(CorpDAO.class);
+		cDao.insert("Auchan5", "auchan5.com");
 
 		UserDto u = new UserDto();
 		u.setLogin("toto@auchan.com");
@@ -58,11 +58,11 @@ public class UserTest {
 
 		Entity<UserDto> userEntity = Entity.entity(u, MediaType.APPLICATION_JSON);
 
-		Response response = target.path("http://localhost:8080/user/register").request().post(userEntity);
+		Response response = target.path("/user/register").request().post(userEntity);
 
 		assertEquals(201, response.getStatus());
 
-		assertTrue(response.getEntity() != null);*/
+		assertTrue(response.getEntity() != null);
 	}
 
 }
