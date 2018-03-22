@@ -10,17 +10,18 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Path("auth")
-public class UserAuth {
+@Path("user")
+public class UserResource {
 	
 	@Context
 	public UriInfo uriInfo;
 	
-	public UserAuth() {
+	public UserResource() {
 		// TODO Auto-generated constructor stub
 	}
 	
 	@POST
+	@Path("auth")
 	@Consumes("application/json")
 	@Produces("application/json")
 	public User authUser(User user) {
@@ -34,5 +35,21 @@ public class UserAuth {
 		}
 		
 	}
+	
+	 @POST
+	 @Path("register")
+	    public Response createUser(User user) {
+	    	UserDAO dao = new UserDAO();
+	    	// Si l'utilisateur existe déjà, renvoyer 409
+	        if ( dao.getUserByLogin(user.getLogin()) == null ) {
+	            return Response.status(Response.Status.CONFLICT).build();
+	        }
+	        if(dao.addUser(user) == null) {
+	        	return Response.status(Response.Status.BAD_REQUEST).build();
+	        }else {
+	        	return Response.ok().build();
+	        }
+	    
+	    }
 
 }

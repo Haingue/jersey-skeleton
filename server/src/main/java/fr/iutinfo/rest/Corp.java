@@ -6,9 +6,7 @@ public class Corp {
 	private String nom;
 	private String domain;
 	
-	public Corp() {
-		// TODO Auto-generated constructor stub
-	}
+	public Corp() {}
 	
 	public Corp(int cno, String nom, String domain) {
 		super();
