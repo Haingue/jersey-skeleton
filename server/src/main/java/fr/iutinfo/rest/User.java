@@ -72,6 +72,9 @@ public class User {
 	public String getCorpName() {
 		return corp.getNom();
 	}
+	public int getCno() {
+		return corp.getCno();
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
