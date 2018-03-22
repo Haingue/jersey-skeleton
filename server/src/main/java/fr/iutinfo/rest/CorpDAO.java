@@ -17,6 +17,9 @@ public interface CorpDAO {
 	@SqlUpdate("DROP TABLE IF EXISTS corporate")
 	void dropTable();
 	
+	@SqlUpdate("insert into corporate (name, domain) values(:name,:domain)")
+	public void insert(@Bind("name") String name, @Bind("domain") String domain);
+	
 	@SqlQuery("select * from corporate where cno = :id")
 	public Corp getById(@Bind("id") int id);
 	
