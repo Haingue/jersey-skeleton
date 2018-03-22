@@ -143,7 +143,7 @@ public class User {
 		this.uno = dto.getUno();
 		this.fonction = dto.getFonction();
 		CorpDAO corpDao = BDDFactory.getDbi().open(CorpDAO.class);
-		//Corp corp = corpDao.getByName()
+		Corp corp = corpDao.getByName(dto.getCorp());
 	}
 
 }
