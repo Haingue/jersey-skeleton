@@ -134,7 +134,7 @@ public class User {
 		tmp.setPass(pass);
 		tmp.setFonction(fonction);
 		tmp.setCorp(this.corp.getNom());
-		return null;
+		return tmp;
 	}
 
 }

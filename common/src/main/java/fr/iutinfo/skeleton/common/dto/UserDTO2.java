@@ -14,6 +14,8 @@ public class UserDTO2 {
 	private String fonction;
 	private String corp;
 
+	public UserDTO2() {}
+	
 	public int getUno() {
 		return uno;
 	}
