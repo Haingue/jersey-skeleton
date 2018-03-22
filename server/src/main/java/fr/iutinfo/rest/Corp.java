@@ -65,6 +65,16 @@ public class Corp {
 		return true;
 	}
 	
+	public CorpDto convertToDto() {
+		CorpDto dto = new CorpDto();
+		dto.setDomain(domain);
+		dto.setName(nom);
+		return dto;
+	}
 	
+	public void initDto(CorpDto dto) {
+		this.nom = dto.getName();
+		this.domain = dto.getDomain();
+	}
 
 }

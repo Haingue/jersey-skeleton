@@ -46,7 +46,11 @@ public class BDDFactory {
     	
     	cdao.createCorpTable();
     	udao.createUserTable();
+<<<<<<< HEAD
 
+=======
+    	
+>>>>>>> 4acc0858cf3400ad0ee73c5f6e51da9074e4c240
     	
     }
 }
