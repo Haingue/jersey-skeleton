@@ -12,5 +12,8 @@ public interface CorpDAO {
 	@SqlQuery("select * from corporate where domain = :domain")
 	public Corp getByDomain(@Bind("domain") String domain);
 	
+	@SqlQuery("select * from corporate where name = :name")
+	public Corp getByName(@Bind("name") String name);
+	
 	void close();
 }
