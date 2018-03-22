@@ -144,6 +144,7 @@ public class User {
 		this.fonction = dto.getFonction();
 		CorpDAO corpDao = BDDFactory.getDbi().open(CorpDAO.class);
 		Corp corp = corpDao.getByName(dto.getCorp());
+		this.corp = corp;
 	}
 
 }
