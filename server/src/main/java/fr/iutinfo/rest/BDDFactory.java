@@ -35,7 +35,7 @@ public class BDDFactory {
     }
     
     public static void initializeBdd() {
-    	dbi.open(CorpDAO.class).createCorpTable();
-    	dbi.open(UserDAO.class).createUserTable();
+    	getDbi().open(CorpDAO.class).createCorpTable();
+    	getDbi().open(UserDAO.class).createUserTable();
     }
 }
