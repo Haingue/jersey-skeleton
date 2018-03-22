@@ -34,7 +34,7 @@ public class BDDFactory {
         return exist;
     }
     
-    public static void initiializeBdd() {
+    public static void initializeBdd() {
     	dbi.open(CorpDAO.class).createCorpTable();
     	dbi.open(UserDAO.class).createUserTable();
     }
