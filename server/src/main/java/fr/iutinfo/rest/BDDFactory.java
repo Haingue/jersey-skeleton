@@ -3,6 +3,7 @@ package fr.iutinfo.rest;
 import org.skife.jdbi.v2.DBI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sqlite.SQLiteConfig;
 import org.sqlite.SQLiteDataSource;
 
 import javax.inject.Singleton;
@@ -19,6 +20,9 @@ public class BDDFactory {
         if(dbi == null) {
             SQLiteDataSource ds = new SQLiteDataSource();
             ds.setUrl("jdbc:sqlite:" + System.getProperty("java.io.tmpdir") + System.getProperty("file.separator") + "data.db");
+            SQLiteConfig config = new SQLiteConfig();
+            config.enforceForeignKeys(true);
+            ds.setConfig(config);
             dbi = new DBI(ds);
             logger.debug("user.dir : " + System.getProperty("user.dir"));
             logger.debug("java.io.tmpdir : " + System.getProperty("java.io.tmpdir"));

@@ -1,5 +1,7 @@
 package fr.iutinfo.rest;
 
+import java.util.List;
+
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
@@ -29,6 +31,9 @@ public interface CorpDAO {
 	
 	@SqlQuery("select * from corporate where name = :name")
 	public Corp getByName(@Bind("name") String name);
+	
+	@SqlQuery("select * from corporate")
+	public List<Corp> getAll();
 	
 	void close();
 }
