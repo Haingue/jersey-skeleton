@@ -48,7 +48,7 @@ public class UserResource {
 			throw new ConflictException(null); 
 		}
 		Corp corp;
-		if ((corp = validLogin(user.getLogin())) != null) {
+		if ((corp = validLogin(user.getLogin())) == null) {
 			throw new BadRequestException();
 		} else {
 			user.setCorp(corp);
@@ -64,6 +64,7 @@ public class UserResource {
 			return null;
 		String domain = s[1];
 		CorpDAO dao = BDDFactory.getDbi().open(CorpDAO.class);
+		System.out.println(domain);
 		
 		Corp corp = dao.getByDomain(domain);
 		

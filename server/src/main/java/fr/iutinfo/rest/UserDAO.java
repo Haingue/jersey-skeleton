@@ -24,14 +24,15 @@ public interface UserDAO {
 	 */
 
 	@SqlUpdate("create table users (" + "uno integer primary key autoincrement,"
-			+ " login varchar(200), password varchar(60)," + " nom varchar(100), prenom varchar(100)," + " cno integer,"
+			+ " login varchar(200), password varchar(60)," + " nom varchar(100), prenom varchar(100),"
+			+ "fonction varchar(500),"+" cno integer,"
 			+ " CONSTRAINT fk_cno FOREIGN KEY (cno)" + "REFERENCES corporate(cno) )")
 	void createUserTable();
 	
 	@SqlUpdate("DROP TABLE IF EXISTS users")
 	void dropTable();
 
-	@SqlUpdate("insert into users (login, password, nom, prenom, fonction, cno) values (:login, :password, :nom, :prenom, :fonction, :cno)")
+	@SqlUpdate("insert into users (login, password, nom, prenom, fonction, cno) values (:login, :pass, :nom, :prenom, :fonction, :cno)")
 	@GetGeneratedKeys
 	int insert(@BindBean() User user);
 
