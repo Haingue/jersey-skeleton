@@ -17,8 +17,6 @@ import org.slf4j.LoggerFactory;
 
 @Path("/corp")
 public class CorpResource {
-	
-    private static Map<Integer, Corp> corps = new HashMap<>();
     
     final static Logger logger = LoggerFactory.getLogger(TempoResource.class);
 	
@@ -28,8 +26,11 @@ public class CorpResource {
     public CorpResource() {}
     
     @POST
-    public Response createCorp(Corp corp) {
+    public Response createCorp(CorpDto dto) {
     	// Si le corp existe déjà, renvoyer 409
+    	Corp corp = new Corp();
+    	corp.initDto(dto);
+    	
         if ( corps.containsKey(corp.getCno()) ) {
             return Response.status(Response.Status.CONFLICT).build();
         }
