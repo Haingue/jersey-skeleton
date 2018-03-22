@@ -9,8 +9,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.core.MediaType;
 
 @Path("user")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class UserResource {
 	
 	@Context
@@ -22,8 +25,6 @@ public class UserResource {
 	
 	@POST
 	@Path("auth")
-	@Consumes("application/json")
-	@Produces("application/json")
 	public User authUser(User user) {
 		UserDAO dao = new UserDAO();
 		User authUser = dao.checkUser(user);
