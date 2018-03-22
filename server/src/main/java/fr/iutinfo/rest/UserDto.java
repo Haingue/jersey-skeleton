@@ -1,11 +1,12 @@
-package fr.iutinfo.skeleton.common.dto;
+package fr.iutinfo.rest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class UserDTO2 {
+public class UserDto {
 
-	final static Logger logger = LoggerFactory.getLogger(UserDTO2.class);
+	final static Logger logger = LoggerFactory.getLogger(UserDto.class);
+	
 	private int uno;
 	private String login;
 	private String pass;
@@ -14,7 +15,7 @@ public class UserDTO2 {
 	private String fonction;
 	private String corp;
 
-	public UserDTO2() {}
+	public UserDto() {}
 	
 	public int getUno() {
 		return uno;
