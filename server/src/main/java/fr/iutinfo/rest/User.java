@@ -134,5 +134,16 @@ public class User {
 		tmp.setCorp(this.corp.getNom());
 		return tmp;
 	}
+	
+	public void initFromDto(UserDto dto) {
+		this.nom = dto.getNom();
+		this.prenom = dto.getPrenom();
+		this.login = dto.getLogin();
+		this.pass = dto.getPass();
+		this.uno = dto.getUno();
+		this.fonction = dto.getFonction();
+		CorpDAO corpDao = BDDFactory.getDbi().open(CorpDAO.class);
+		//Corp corp = corpDao.getByName()
+	}
 
 }
