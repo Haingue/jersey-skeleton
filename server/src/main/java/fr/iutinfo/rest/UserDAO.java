@@ -23,7 +23,7 @@ public interface UserDAO {
 	 * @SqlUpdate("drop table if exists users") void dropUserTable();
 	 */
 
-	@SqlUpdate("create table users (" + "cno integer primary key autoincrement,"
+	@SqlUpdate("create table users (" + "uno integer primary key autoincrement,"
 			+ " login varchar(200), password varchar(60)," + " nom varchar(100), prenom varchar(100)," + " cno integer,"
 			+ " CONSTRAINT fk_cno FOREIGN KEY (cno)" + "REFERENCES corporate(cno) )")
 	void createUserTable();
