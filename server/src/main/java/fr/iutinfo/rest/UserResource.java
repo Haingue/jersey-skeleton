@@ -23,21 +23,25 @@ public class UserResource {
 
 	@POST
 	@Path("auth")
-	public User authUser(User user) {
+	public UserDto authUser(UserDto userDto) {
+		User user = new User();
+		user.initFromDto(userDto);
 		UserDAO dao = BDDFactory.getDbi().open(UserDAO.class);
 		User authUser = dao.checkUser(user.getLogin(), user.getPass());
 
 		if (authUser == null) {
 			throw new NotFoundException();
 		} else {
-			return authUser;
+			return authUser.convertToDto();
 		}
 
 	}
 
 	@POST
 	@Path("register")
-	public UserDto createUser(User user) {
+	public UserDto createUser(UserDto userDto) {
+		User user = new User();
+		user.initFromDto(userDto);
 		UserDAO dao = BDDFactory.getDbi().open(UserDAO.class);
 		// Si l'utilisateur existe déjà, renvoyer 409
 		if (dao.findByLogin(user.getLogin()) != null) {
