@@ -1,7 +1,5 @@
 package fr.iutinfo.rest;
 
-import fr.iutinfo.skeleton.common.dto.UserDTO2;
-
 public class User {
 	
 	private int uno;
@@ -125,8 +123,8 @@ public class User {
 		return true;
 	}
 	
-	public UserDTO2 convertToDto() {
-		UserDTO2 tmp = new UserDTO2();
+	public UserDto convertToDto() {
+		UserDto tmp = new UserDto();
 		tmp.setUno(uno);
 		tmp.setNom(nom);
 		tmp.setPrenom(prenom);
