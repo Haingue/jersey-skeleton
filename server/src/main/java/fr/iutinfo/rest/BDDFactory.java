@@ -40,15 +40,33 @@ public class BDDFactory {
     
     public static void initializeBdd() {
     	
+    	CorpDAO cDao = getDbi().open(CorpDAO.class);
+    	UserDAO uDao = getDbi().open(UserDAO.class);
     	
-    	CorpDAO cdao = getDbi().open(CorpDAO.class);
-    	UserDAO udao = getDbi().open(UserDAO.class);
-    	
-       	udao.dropTable();
-    	cdao.dropTable();
+       	uDao.dropTable();
+    	cDao.dropTable();
  
     	
-    	cdao.createCorpTable();
-    	udao.createUserTable();
+    	cDao.createCorpTable();
+    	uDao.createUserTable();
+    	
+		cDao.insert("Auchan", "auchan.com");
+		cDao.insert("Decathlon", "decathlon.com");		
+		cDao.insert("Carrefour", "carrefour.net");
+		cDao.insert("SportIn", "sportin.fr");
+		
+		User u0 = new User();
+		u0.setLogin("fabien.h@decathlon.com");
+		u0.setPass("azerty");
+		u0.setNom("Haingue");
+		u0.setPrenom("Fabien");
+		uDao.insert(u0);
+		
+		User u1 = new User();
+		u1.setLogin("toto.t@auchan.com");
+		u1.setPass("azerty");
+		u1.setNom("Tartampion");
+		u1.setPrenom("Toto");
+		uDao.insert(u1);
     }
 }
