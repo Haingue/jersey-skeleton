@@ -1,8 +1,8 @@
 package fr.iutinfo.skeleton.auth;
 
 import fr.iutinfo.rest.BDDFactory;
-import fr.iutinfo.skeleton.api.User;
-import fr.iutinfo.skeleton.api.UserDao;
+/*import fr.iutinfo.skeleton.api.User;
+import fr.iutinfo.skeleton.api.UserDao;*/
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +26,7 @@ public class AuthFilter implements ContainerRequestFilter {
         logger.debug("authorizationHeader : " + authorizationHeader);
 
         if (authorizationHeader != null) {
-            String[] loginPassword = BasicAuth.decode(authorizationHeader);
+           /* String[] loginPassword = BasicAuth.decode(authorizationHeader);
             checkLoginPassword(loginPassword);
             String login = loginPassword[0];
             String password = loginPassword[1];
@@ -37,20 +37,20 @@ public class AuthFilter implements ContainerRequestFilter {
                 containerRequest.setSecurityContext(new AppSecurityContext(user, scheme));
             } else {
                 containerRequest.setSecurityContext(new AppSecurityContext(User.getAnonymousUser(), scheme));
-            }
+            }*/
         } else {
-            containerRequest.setSecurityContext(new AppSecurityContext(User.getAnonymousUser(), scheme));
+           // containerRequest.setSecurityContext(new AppSecurityContext(User.getAnonymousUser(), scheme));
         }
     }
 
-    private User loadUserFromLogin(String login) {
+   /* private User loadUserFromLogin(String login) {
         UserDao dao = BDDFactory.getDbi().open(UserDao.class);
         User user = dao.findByName(login);
         if (user == null) {
             user = User.getAnonymousUser();
         }
         return user;
-    }
+    }*/
 
     private void checkLoginPassword(String[] loginPassword) {
         if (loginPassword == null || loginPassword.length != 2) {
