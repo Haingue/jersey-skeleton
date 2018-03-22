@@ -14,6 +14,9 @@ public interface CorpDAO {
 			+ "constraint uniq_domain unique (domain))")
 	public void createCorpTable();
 	
+	@SqlUpdate("DROP TABLE IF EXISTS corporate")
+	void dropTable();
+	
 	@SqlQuery("select * from corporate where cno = :id")
 	public Corp getById(@Bind("id") int id);
 	

@@ -27,6 +27,9 @@ public interface UserDAO {
 			+ " login varchar(200), password varchar(60)," + " nom varchar(100), prenom varchar(100)," + " cno integer,"
 			+ " CONSTRAINT fk_cno FOREIGN KEY (cno)" + "REFERENCES corporate(cno) )")
 	void createUserTable();
+	
+	@SqlUpdate("DROP TABLE IF EXISTS users")
+	void dropTable();
 
 	@SqlUpdate("insert into users (login, password, nom, prenom, fonction, cno) values (:login, :password, :nom, :prenom, :fonction, :cno)")
 	@GetGeneratedKeys
