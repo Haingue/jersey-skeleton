@@ -12,7 +12,7 @@ public class UserDAO {
 	private BDDFactory bddFact;
 	private CorpDAO corpDAO;
 
-	public UserDAO() {
+	/*public UserDAO() {
 		bddFact = new BDDFactory();
 		corpDAO = new CorpDAO();
 	}
@@ -179,6 +179,6 @@ public class UserDAO {
 		} catch (Exception er) {
 			System.out.println("Error");
 		}
-	}
+	}*/
 
 }

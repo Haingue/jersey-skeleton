@@ -16,7 +16,7 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public class UserResource {
 	
-	@Context
+	/*@Context
 	public UriInfo uriInfo;
 	
 	public UserResource() {
@@ -52,5 +52,5 @@ public class UserResource {
 	        }
 	    
 	    }
-
+*/
 }
