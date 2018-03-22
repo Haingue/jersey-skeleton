@@ -11,7 +11,7 @@ public interface CorpDAO {
 			+ "name varchar(50) not null,"
 			+ "domain varchar(50) not null,"
 			+ "constraint uniq_corporate_name unique (name),"
-			+ "constraint uniq_domain unique (domain)")
+			+ "constraint uniq_domain unique (domain))")
 	public void createCorpTable();
 	
 	@SqlQuery("select * from corporate where cno = :id")
