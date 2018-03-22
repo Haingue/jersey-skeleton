@@ -1,6 +1,6 @@
 package fr.iutinfo.skeleton.auth;
 
-import fr.iutinfo.skeleton.api.BDDFactory;
+import fr.iutinfo.rest.BDDFactory;
 import fr.iutinfo.skeleton.api.User;
 import fr.iutinfo.skeleton.api.UserDao;
 import org.slf4j.Logger;

@@ -6,14 +6,15 @@ import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+
+import static fr.iutinfo.rest.BDDFactory.getDbi;
+import static fr.iutinfo.rest.BDDFactory.tableExist;
+
 import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static fr.iutinfo.skeleton.api.BDDFactory.getDbi;
-import static fr.iutinfo.skeleton.api.BDDFactory.tableExist;
-
-@Path("/user")
+@Path("/user/test")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class UserResource {

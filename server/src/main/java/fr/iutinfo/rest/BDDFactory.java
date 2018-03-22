@@ -1,40 +1,36 @@
 package fr.iutinfo.rest;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+import org.skife.jdbi.v2.DBI;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.sqlite.SQLiteDataSource;
+
+import javax.inject.Singleton;
+import java.sql.DatabaseMetaData;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@Singleton
 public class BDDFactory {
+    private static DBI dbi = null;
+    final static Logger logger = LoggerFactory.getLogger(BDDFactory.class);
 
-	public Connection getConnection() {
-		Connection con = null;
-		try {
+    public static DBI getDbi() {
+        if(dbi == null) {
+            SQLiteDataSource ds = new SQLiteDataSource();
+            ds.setUrl("jdbc:sqlite:" + System.getProperty("java.io.tmpdir") + System.getProperty("file.separator") + "data.db");
+            dbi = new DBI(ds);
+            logger.debug("user.dir : " + System.getProperty("user.dir"));
+            logger.debug("java.io.tmpdir : " + System.getProperty("java.io.tmpdir"));
+        }
+        return dbi;
+    }
 
-			Class.forName("org.postgresql.Driver");
-
-			// System.out.println("Driver loaded !");
-			String url = "jdbc:postgresql://psqlserv/n3p1";
-			// port 5432 de la base n3p1
-			String nom = "parissej";
-			String mdp = "moi";
-			con = DriverManager.getConnection(url, nom, mdp);
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-			try {
-				con.close();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		} catch (ClassNotFoundException e) {
-			try {
-				con.close();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
-		return con;
-	}
-
+    public static boolean tableExist(String tableName) throws SQLException {
+        DatabaseMetaData dbm = getDbi().open().getConnection().getMetaData();
+        ResultSet tables = dbm.getTables(null, null, tableName, null);
+        boolean exist = tables.next();
+        tables.close();
+        return exist;
+    }
 }
