@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.ws.rs.BadRequestException;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -26,21 +27,19 @@ public class CorpResource {
     public CorpResource() {}
     
     @POST
-    public Response createCorp(CorpDto dto) {
-    	// Si le corp existe déjà, renvoyer 409
+    public CorpDto createCorp(CorpDto dto) {
     	Corp corp = new Corp();
     	corp.initDto(dto);
     	
-        if ( corps.containsKey(corp.getCno()) ) {
-            return Response.status(Response.Status.CONFLICT).build();
-        }
-        else {
-        	corps.put(corp.getCno(), corp);
-
-            // On renvoie 201 et l'instance de la ressource dans le Header HTTP 'Location'
-            URI instanceURI = uriInfo.getAbsolutePathBuilder().path( String.valueOf(corp.getCno()) ).build();
-            return Response.created(instanceURI).build();
-        }
+    	CorpDAO dao = BDDFactory.getDbi().open(CorpDAO.class);
+		// Si l'entreprise existe déjà, renvoyer 409
+    	
+		if (dao.getByName(corp.getNom()) != null) {
+			throw new ConflictException(null); 
+		} else {
+			dao.insert(corp.getNom(),corp.getDomain());
+			return corp.convertToDto();
+		}
     	
     }
 }
