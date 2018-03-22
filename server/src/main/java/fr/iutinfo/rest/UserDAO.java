@@ -1,184 +1,56 @@
 package fr.iutinfo.rest;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAO {
+import org.skife.jdbi.v2.sqlobject.Bind;
+import org.skife.jdbi.v2.sqlobject.BindBean;
+import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
+import org.skife.jdbi.v2.sqlobject.SqlQuery;
+import org.skife.jdbi.v2.sqlobject.SqlUpdate;
+import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
+import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 
-	private BDDFactory bddFact;
-	private CorpDAO corpDAO;
-
-	/*public UserDAO() {
-		bddFact = new BDDFactory();
-		corpDAO = new CorpDAO();
-	}
-
-	public List<User> getAllUsers() {
-		List<User> list = new ArrayList<User>();
-		ResultSet rs = sql_Query("Select * from users");
-		try {
-			while (rs.next()) {
-				int uno = rs.getInt("pno");
-				String login = rs.getString("login");
-				String passw = rs.getString("password");
-				String nom = rs.getString("nom");
-				String prenom = rs.getString("prenom");
-				String fonct = rs.getString("fonction");
-				int cno = rs.getInt("cno");
-				User user = new User(uno, login, passw, nom, prenom, fonct, null);
-				user.setCorp(corpDAO.getCorpById(cno));
-				list.add(user);
-			}
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
-		return list;
-	}
-
-	public User checkUser(User user) {
-		ResultSet rs = sql_Query(
-				"Select * from users where login = '" + user.getLogin() + "' and password = '" + user.getPass() + "'");
-		User tmp = null;
-		try {
-			rs.next();
-			int uno = rs.getInt("pno");
-			String login = rs.getString("login");
-			String passw = rs.getString("password");
-			String nom = rs.getString("nom");
-			String prenom = rs.getString("prenom");
-			String fonct = rs.getString("fonction");
-			int cno = rs.getInt("cno");
-			Corp corp = corpDAO.getCorpById(cno);
-			tmp = new User(uno, login, passw, nom, prenom, fonct, corp);
-
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
-		return tmp;
-	}
-
-	public User getUserByLogin(String loginUser) {
-		ResultSet rs = sql_Query("Select * from users where login = '" + loginUser + "'");
-		try {
-			rs.next();
-			int uno = rs.getInt("pno");
-			String login = rs.getString("login");
-			String passw = rs.getString("password");
-			String nom = rs.getString("nom");
-			String prenom = rs.getString("prenom");
-			String fonct = rs.getString("fonction");
-			int cno = rs.getInt("cno");
-			User tmp = new User(uno, login, passw, nom, prenom, fonct, null);
-			tmp.setCorp(corpDAO.getCorpById(cno));
-			return tmp;
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
-		return null;
-	}
-
-	public List<User> getUsersByCorpId(int idCorp) {
-		List<User> list = new ArrayList<User>();
-		ResultSet rs = sql_Query("Select * from users where cno =" + idCorp + "");
-
-		try {
-			while (rs.next()) {
-				int uno = rs.getInt("pno");
-				String login = rs.getString("login");
-				String passw = rs.getString("password");
-				String nom = rs.getString("nom");
-				String prenom = rs.getString("prenom");
-				String fonct = rs.getString("fonction");
-				int cno = rs.getInt("cno");
-				User user = new User(uno, login, passw, nom, prenom, fonct, null);
-				user.setCorp(corpDAO.getCorpById(cno));
-				list.add(user);
-			}
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
-		return list;
-	}
-
-	public User getUserByID(int id) {
-		ResultSet rs = sql_Query("Select * from users where uno =" + id + "");
-
-		try {
-			rs.next();
-			int uno = rs.getInt("pno");
-			String login = rs.getString("login");
-			String passw = rs.getString("password");
-			String nom = rs.getString("nom");
-			String prenom = rs.getString("prenom");
-			String fonct = rs.getString("fonction");
-			int cno = rs.getInt("cno");
-			User user = new User(uno, login, passw, nom, prenom, fonct, null);
-			user.setCorp(corpDAO.getCorpById(cno));
-			return user;
-
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
-		return null;
-	}
-
-	public User addUser(User user) {
-		Corp c = getCorpByDomain(user);
-		if (c == null) {
-			return null;
-		}
-		String query = "insert into users values (default, '" + user.getLogin() + "', '" + user.getPass() + "', '"
-				+ user.getNom() + "', '" + user.getPrenom() + "', '" + user.getFonction() + "', " + c.getCno() + " ";
-		System.out.println(query);
-		sql_Update(query);
-		return user;
-	}
-
-	private Corp getCorpByDomain(User user) {
-		String[] tab = user.getLogin().split("@");
-		if (tab.length > 2) {
-			return null;
-		}
-		String domaine = tab[tab.length - 1];
-		return corpDAO.getCorpByDomainName(domaine);
-	}
-
-	private ResultSet sql_Query(String request) {
-		Connection con = bddFact.getConnection();
-		Statement stmt;
-		ResultSet rs = null;
-		try {
-			stmt = con.createStatement();
-			rs = stmt.executeQuery(request);
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		} catch (Exception er) {
-			System.out.println("Error");
-		} finally {
-			try {
-				con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return rs;
-	}
-
-	private void sql_Update(String request) {
-		Connection con = bddFact.getConnection();
-		Statement stmt;
-		try {
-			stmt = con.createStatement();
-			stmt.executeUpdate(request);
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		} catch (Exception er) {
-			System.out.println("Error");
-		}
-	}*/
-
+public interface UserDAO {
+    /*@SqlUpdate("CREATE TABLE users\n" + 
+    		"(\n" + 
+    		"	uno SERIAL PRIMARY KEY,\n" + 
+    		"	login VARCHAR(100) NOT NULL,\n" + 
+    		"	password VARCHAR(50) NOT NULL,\n" + 
+    		"	nom VARCHAR(50) NOT NULL,\n" + 
+    		"	prenom VARCHAR(50) NOT NULL,\n" + 
+    		"	fonction VARCHAR(100),\n" + 
+    		"	cno INT NOT NULL,\n" + 
+    		"\n" + 
+    		"	CONSTRAINT fk_cno FOREIGN KEY (cno)\n" + 
+    		"		REFERENCES corporate(cno),\n" + 
+    		"\n" + 
+    		"	CONSTRAINT uniq_login UNIQUE (login)\n" + 
+    		")")
+    void createUserTable();
+    
+    @SqlUpdate("drop table if exists users")
+    void dropUserTable();    
+    */
+	
+    @SqlUpdate("insert into users (login, password, nom, prenom, fonction, cno) values (:login, :password, :nom, :prenom, :fonction, :cno)")
+    @GetGeneratedKeys
+    int insert(@BindBean() User user);
+    
+    @SqlQuery("select * from users where login = :login")
+    @RegisterMapperFactory(BeanMapperFactory.class)
+    User findByLogin(@Bind("login") String login);
+    
+    @SqlQuery("select * from users where login = :login and password = :password")
+    @RegisterMapperFactory(BeanMapperFactory.class)
+    User checkUser(@Bind("login") String login, @Bind("password") String password);
+    
+    @SqlQuery("select * from users order by uno")
+    @RegisterMapperFactory(BeanMapperFactory.class)
+    List<User> all();
+    
+    @SqlQuery("select * from users where uno = :uno")
+    @RegisterMapperFactory(BeanMapperFactory.class)
+    User findById(@Bind("uno") int uno);
+    
+    void close();
 }
