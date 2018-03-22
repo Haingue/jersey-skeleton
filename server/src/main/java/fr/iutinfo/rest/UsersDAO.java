@@ -36,16 +36,13 @@ public interface UsersDAO {
     @GetGeneratedKeys
     int insert(@BindBean() User user);
     
-    @SqlQuery("select * from users where name = :nom")
+    @SqlQuery("select * from users where login = :login")
     @RegisterMapperFactory(BeanMapperFactory.class)
-    User findByName(@Bind("nom") String nom);
+    User findByLogin(@Bind("login") String login);
     
-    @SqlQuery("select * from users where search like :nom")
+    @SqlQuery("select * from users where login = :login and password = :password")
     @RegisterMapperFactory(BeanMapperFactory.class)
-    List<User> search(@Bind("nom") String nom);
-    
-    @SqlUpdate("delete from users where uno = :uno")
-    void delete(@Bind("uno") int uno);
+    User checkUser(@Bind("login") String login, @Bind("password") String password);
     
     @SqlQuery("select * from users order by uno")
     @RegisterMapperFactory(BeanMapperFactory.class)
@@ -53,7 +50,7 @@ public interface UsersDAO {
     
     @SqlQuery("select * from users where uno = :uno")
     @RegisterMapperFactory(BeanMapperFactory.class)
-    User findByUno(@Bind("uno") int uno);
+    User findById(@Bind("uno") int uno);
     
     void close();
 }
