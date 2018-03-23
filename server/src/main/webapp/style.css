@@ -1,0 +1,183 @@
+/*#page1{
+	position:absolute;
+}*/
+
+h2{
+text-align:center;
+color:rgb(55,55,55);
+font-family:Droid Sans,Myriad Pro;
+}
+
+#premierh2{
+margin-top:80px;
+}
+
+#logo{
+margin-left: auto;
+margin-right: auto;
+display:block;
+width:10em;
+}
+#enregistrer,#identifier,#confirmerI,#confirmerE
+{
+margin-left: auto;
+margin-right: auto;
+text-align:center;
+color:white;
+background-color:rgb(210,10,65);
+border-radius:1em;
+width:8em;
+margin-top:110px;
+display:block;
+
+}
+#identifier{
+margin-left: auto;
+margin-right: auto;
+text-align:center;
+color:white;
+background-color:rgb(210,10,65);
+border-radius:1em;
+width:8em;
+margin-top:20px;
+}
+
+#formE,#formI{
+	margin-top:2em;
+	text-align:center;
+	margin-left: auto;
+	margin-right: auto;
+	display:block;	
+}
+
+#Enom,#Emdp,#Inom,#Imdp{
+	text-align:center;
+	margin-left: auto;
+	margin-right: auto;
+	display:block;
+	color:rgb(210,10,65);
+}
+#rE,#rI{
+	text-align:center;
+	margin-left: auto;
+	margin-right: auto;
+	display:block;
+	color:rgb(210,10,65);
+	width:5em;
+}
+#bordgauche{
+	float:left;
+	height:90%;
+width:auto;
+}
+#borddroit{
+	float:right;
+	height:90%;
+width:auto;
+}
+#Menu{
+	top:0;
+	left:0;
+	bottom:0;
+	float:left;
+	position:absolute;
+	display:block;
+	width:150px;
+	background-color:rgb(59,56,56);
+	padding-top: 25px;
+	
+}
+
+#logo2{
+margin-left: auto;
+margin-right: auto;
+margin-bottom: 10px;
+display:block;
+width:auto;
+
+}
+#profil,#events,#settings,#eventdispo,#programme{
+	margin-bottom:30px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align:center;
+	color:white;
+	background-color:rgb(59,56,56);
+	border-radius:1em;
+	width:100%;
+	display:block;
+	
+}
+#switch{
+	position: absolute;
+	top: 0; 
+	left: 150px;
+	display: inline-block;
+    vertical-align: top;
+	width:auto;
+	background-color:white;
+}
+#titre1,#titre2,#titre3,#titre4{
+	font-size:30px;
+	padding-left:10px;
+}
+#creerevent,#eventboard,#pageprofil,#pagereglage{
+	margin-left:150px;
+	margin-top: 35px;
+	/*text-align:center;*/
+	margin-right: auto;
+	display:block;
+	float:none;
+}
+#creerevent1,#creerevent2,#uploadlinkd{
+	margin-left:20px;
+	margin-right: auto;
+	text-align:center;
+	color:white;
+	background-color:rgb(210,10,65);
+	border-radius:1em;
+	width:auto;
+}
+
+
+
+/* ///////POLICE:
+
+//Droid Sans
+//Myriad Pro
+
+@font-face{
+font-family:Droid Sans,Myriad Pro;
+src: ul('Droid Sans');
+
+
+////////////Stock image
+Flickr
+500px
+
+
+/*
+.accordeon {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+}
+
+.active, .accordeon:hover {
+    background-color: #ccc; 
+}
+
+article {
+    padding: 0 18px;
+    display: none;
+    background-color: white;
+    overflow: hidden;
+}
+    */
