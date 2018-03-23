@@ -50,5 +50,7 @@ public class BDDFactory {
     	
     	cdao.createCorpTable();
     	udao.createUserTable();
+    	
+    	// TODO ajouter des exemples
     }
 }
