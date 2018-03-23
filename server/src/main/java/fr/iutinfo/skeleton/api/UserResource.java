@@ -49,7 +49,7 @@ public class UserResource {
     }
     
     @GET
-    @Path("/{email}")
+    @Path("/mails/{email}")
     public UserDto getUserByMail(@PathParam("email") String email) {
         User user = dao.findByEmail(email);
         if (user == null) {
