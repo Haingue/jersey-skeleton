@@ -41,6 +41,11 @@ public class UserTest {
 	@Test
 	public void RegisterTest() {
 		/*
+
+		BDDFactory.initializeBdd();
+		CorpDAO cDao = BDDFactory.getDbi().open(CorpDAO.class);
+		cDao.insert("Auchan5", "auchan5.com");
+
 		 * CorpDAO cDao = BDDFactory.getDbi().open(CorpDAO.class);
 		 * cDao.insert("Auchan5", "auchan5.com");
 		 * 
@@ -102,6 +107,7 @@ public class UserTest {
 			writer = new OutputStreamWriter(conn.getOutputStream());
 			writer.write(data);
 			writer.flush();
+
 
 			// lecture de la réponse
 			reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));

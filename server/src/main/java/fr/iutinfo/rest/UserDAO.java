@@ -7,6 +7,7 @@ import org.skife.jdbi.v2.sqlobject.BindBean;
 import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
+import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 
@@ -37,19 +38,19 @@ public interface UserDAO {
 	int insert(@BindBean() User user);
 
 	@SqlQuery("select * from users where login = :login")
-	@RegisterMapperFactory(BeanMapperFactory.class)
+	@RegisterMapper(User.UserMapper.class)
 	User findByLogin(@Bind("login") String login);
 
 	@SqlQuery("select * from users where login = :login and password = :password")
-	@RegisterMapperFactory(BeanMapperFactory.class)
+	@RegisterMapper(User.UserMapper.class)
 	User checkUser(@Bind("login") String login, @Bind("password") String password);
 
 	@SqlQuery("select * from users order by uno")
-	@RegisterMapperFactory(BeanMapperFactory.class)
+	@RegisterMapper(User.UserMapper.class)
 	List<User> all();
 
 	@SqlQuery("select * from users where uno = :uno")
-	@RegisterMapperFactory(BeanMapperFactory.class)
+	@RegisterMapper(User.UserMapper.class)
 	User findById(@Bind("uno") int uno);
 
 	void close();
