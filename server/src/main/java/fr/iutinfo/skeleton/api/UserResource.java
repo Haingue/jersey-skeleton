@@ -47,6 +47,16 @@ public class UserResource {
         }
         return user.convertToDto();
     }
+    
+    @GET
+    @Path("/{email}")
+    public UserDto getUserByMail(@PathParam("email") String email) {
+        User user = dao.findByEmail(email);
+        if (user == null) {
+            throw new WebApplicationException(404);
+        }
+        return user.convertToDto();
+    }
 
     @GET
     public List<UserDto> getAllUsers(@QueryParam("q") String query) {
