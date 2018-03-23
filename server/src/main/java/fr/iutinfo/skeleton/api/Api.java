@@ -11,6 +11,7 @@ public class Api extends ResourceConfig {
 
     public Api() {
         packages("fr.iutinfo.skeleton.api");
+        packages("fr.iutinfo.events");
         //register(LoggingFilter.class);
         register(AuthFilter.class);
         register(RolesAllowedDynamicFeature.class);
