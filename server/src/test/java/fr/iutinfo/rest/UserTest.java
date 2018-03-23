@@ -20,7 +20,7 @@ import org.junit.Test;
 
 public class UserTest {
 
-	private WebTarget target;
+	//private WebTarget target;
 
 	protected Application configure() {
 		return new Api();
@@ -28,9 +28,9 @@ public class UserTest {
 
 	@Before
 	public void init() {
-		Client c = ClientBuilder.newClient();
+		/*Client c = ClientBuilder.newClient();
 
-		target = c.target("http://localhost:8080/v1");
+		target = c.target("http://localhost:8080/v1");*/
 	}
 
 	@After
@@ -59,16 +59,16 @@ public class UserTest {
 	
 	@Test
 	public void getUserTest() {
-		try {
+		/*try {
 			String response = get("http://localhost:8080/v1/user");
 			System.out.println(response);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 
-	public static String get(String url) throws IOException {
+	/*public static String get(String url) throws IOException {
 		String source = "";
 		URL oracle = new URL(url);
 		URLConnection yc = oracle.openConnection();
@@ -79,9 +79,9 @@ public class UserTest {
 			source += inputLine;
 		in.close();
 		return source;
-	}
+	}*/
 
-	public static String post(String adress, List<String> keys, List<String> values) throws IOException {
+	/*public static String post(String adress, List<String> keys, List<String> values) throws IOException {
 		String result = "";
 		OutputStreamWriter writer = null;
 		BufferedReader reader = null;
@@ -122,6 +122,6 @@ public class UserTest {
 			}
 		}
 		return result;
-	}
+	}*/
 
 }

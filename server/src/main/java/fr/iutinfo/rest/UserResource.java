@@ -1,7 +1,11 @@
 package fr.iutinfo.rest;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -19,6 +23,16 @@ public class UserResource {
 	public UriInfo uriInfo;
 
 	public UserResource() {
+	}
+	
+	@GET
+	public List<UserDto> getAllUser(){
+		UserDAO dao = BDDFactory.getDbi().open(UserDAO.class);
+		List<UserDto> list = new ArrayList<UserDto>();
+		for(User i : dao.all()) {
+			list.add(i.convertToDto());
+		}
+		return list;
 	}
 
 	@POST

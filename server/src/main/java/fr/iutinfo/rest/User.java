@@ -70,10 +70,10 @@ public class User {
 		this.fonction = fonction;
 	}
 	public String getCorpName() {
-		return corp.getNom();
+		return (corp == null ? null : corp.getNom());
 	}
 	public int getCno() {
-		return corp.getCno();
+		return (this.corp == null ? -1 : corp.getCno());
 	}
 	@Override
 	public int hashCode() {

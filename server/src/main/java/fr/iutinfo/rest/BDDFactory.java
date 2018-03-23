@@ -50,7 +50,7 @@ public class BDDFactory {
     	cDao.createCorpTable();
     	uDao.createUserTable();
     	
-		cDao.insert("Auchan", "auchan.com");
+		/*cDao.insert("Auchan", "auchan.com");
 		cDao.insert("Decathlon", "decathlon.com");		
 		cDao.insert("Carrefour", "carrefour.net");
 		cDao.insert("SportIn", "sportin.fr");
@@ -60,6 +60,7 @@ public class BDDFactory {
 		u0.setPass("azerty");
 		u0.setNom("Haingue");
 		u0.setPrenom("Fabien");
+		//u0.setCorp(cDao.getByDomain(u0.g));
 		uDao.insert(u0);
 		
 		User u1 = new User();
@@ -67,6 +68,6 @@ public class BDDFactory {
 		u1.setPass("azerty");
 		u1.setNom("Tartampion");
 		u1.setPrenom("Toto");
-		uDao.insert(u1);
+		uDao.insert(u1);*/
     }
 }
