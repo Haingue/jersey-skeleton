@@ -1,15 +1,18 @@
 package fr.iutinfo.rest;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+import java.util.List;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Application;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 import org.junit.After;
 import org.junit.Before;
@@ -35,37 +38,96 @@ public class UserTest {
 
 	}
 
-	/*
-	 * @Test public void should_return_current_user_with_authorization_header() {
-	 * h.createUserWithPassword("tclavier", "motdepasse", "graindesel"); String
-	 * authorization = "Basic " + Base64.encodeAsString("tclavier:motdepasse"); User
-	 * utilisateur = target(url).request().header(AUTHORIZATION,
-	 * authorization).get(User.class); assertEquals("tclavier",
-	 * utilisateur.getName()); }
-	 * 
-	 */
-
 	@Test
 	public void RegisterTest() {
 		/*
+
 		BDDFactory.initializeBdd();
 		CorpDAO cDao = BDDFactory.getDbi().open(CorpDAO.class);
 		cDao.insert("Auchan5", "auchan5.com");
 
-		UserDto u = new UserDto();
-		u.setLogin("toto@auchan.com");
-		u.setPass("azerty");
-		u.setNom("Tartanpion");
-		u.setPrenom("Toto");
+		 * CorpDAO cDao = BDDFactory.getDbi().open(CorpDAO.class);
+		 * cDao.insert("Auchan5", "auchan5.com");
+		 * 
+		 * UserDto u = new UserDto(); u.setLogin("toto@auchan.com");
+		 * u.setPass("azerty"); u.setNom("Tartanpion"); u.setPrenom("Toto");
+		 * 
+		 * Entity<UserDto> userEntity = Entity.entity(u, MediaType.APPLICATION_JSON);
+		 * 
+		 * Response response = target.path("/user/register").request().post(userEntity);
+		 * 
+		 * assertEquals(201, response.getStatus());
+		 * 
+		 * assertTrue(response.getEntity() != null);
+		 */
+	}
+	
+	@Test
+	public void getUserTest() {
+		try {
+			String response = get("http://localhost:8080/v1/user");
+			System.out.println(response);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
-		Entity<UserDto> userEntity = Entity.entity(u, MediaType.APPLICATION_JSON);
+	public static String get(String url) throws IOException {
+		String source = "";
+		URL oracle = new URL(url);
+		URLConnection yc = oracle.openConnection();
+		BufferedReader in = new BufferedReader(new InputStreamReader(yc.getInputStream()));
+		String inputLine;
 
-		Response response = target.path("/user/register").request().post(userEntity);
+		while ((inputLine = in.readLine()) != null)
+			source += inputLine;
+		in.close();
+		return source;
+	}
 
-		assertEquals(201, response.getStatus());
+	public static String post(String adress, List<String> keys, List<String> values) throws IOException {
+		String result = "";
+		OutputStreamWriter writer = null;
+		BufferedReader reader = null;
+		try {
+			// encodage des paramètres de la requête
+			String data = "";
+			for (int i = 0; i < keys.size(); i++) {
+				if (i != 0)
+					data += "&amp;";
+				data += URLEncoder.encode(keys.get(i), "UTF-8") + "=" + URLEncoder.encode(values.get(i), "UTF-8");
+			}
+			// création de la connection
+			URL url = new URL(adress);
+			URLConnection conn = url.openConnection();
+			conn.setDoOutput(true);
 
-		assertTrue(response.getEntity() != null);
-		*/
+			// envoi de la requête
+			writer = new OutputStreamWriter(conn.getOutputStream());
+			writer.write(data);
+			writer.flush();
+
+
+			// lecture de la réponse
+			reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			String ligne;
+			while ((ligne = reader.readLine()) != null) {
+				result += ligne;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				writer.close();
+			} catch (Exception e) {
+			}
+			try {
+				reader.close();
+			} catch (Exception e) {
+			}
+		}
+		return result;
 	}
 
 }

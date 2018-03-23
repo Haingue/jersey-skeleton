@@ -28,7 +28,6 @@ public interface CorpDAO {
     @RegisterMapperFactory(BeanMapperFactory.class)
 	public Corp getById(@Bind("id") int id);
 	
-
 	@SqlQuery("select * from corporate where domain = :domain")
     @RegisterMapperFactory(BeanMapperFactory.class)
 	public Corp getByDomain(@Bind("domain") String domain);
