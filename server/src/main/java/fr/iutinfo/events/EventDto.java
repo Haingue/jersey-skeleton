@@ -1,4 +1,4 @@
-package fr.iutinfo.skeleton.api;
+package fr.iutinfo.events;
 
 public class EventDto {
 	

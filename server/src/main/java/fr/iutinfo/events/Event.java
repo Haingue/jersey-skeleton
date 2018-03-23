@@ -1,4 +1,4 @@
-package fr.iutinfo.skeleton.api;
+package fr.iutinfo.events;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;

@@ -1,4 +1,4 @@
-package fr.iutinfo.skeleton.api;
+package fr.iutinfo.events;
 
 import static fr.iutinfo.skeleton.api.BDDFactory.getDbi;
 import static fr.iutinfo.skeleton.api.BDDFactory.tableExist;
