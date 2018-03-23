@@ -13,17 +13,17 @@ import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 public interface EventDao {
 
 	@SqlUpdate("create table event (eno integer primary key autoincrement,"
-			+ " label varchar(1000)"
-			+ " date timestamp,"
-			+ " participants_needed integer,"
+			+ " label varchar(1000),"
+			+ " dateEvent varchar(20),"
+			+ " participantsNeeded integer,"
 			+ " price integer)")
-    void createUserTable();
+    void createEventTable();
 	
 	@SqlUpdate("drop table if exists event")
-    void dropUserTable();
+    void dropEventTable();
 	
-	@SqlUpdate("insert into event (label,date,participants_needed,price) "
-			+ "values (:label,:date,:participants_needed,:price")
+	@SqlUpdate("insert into event (label,dateEvent,participantsNeeded,price) "
+			+ "values (:label,:dateEvent,:participantsNeeded,:price)")
 	@GetGeneratedKeys
 	int insert(@BindBean Event event);
 	
@@ -31,7 +31,7 @@ public interface EventDao {
 	void delete(@Bind("eno") int eno);
 	
 	@SqlUpdate("update event "
-			+ "set label = :label date = :date participants_needed = :participants_needed price = :price"
+			+ "set label = :label dateEvent = :dateEvent participantsNeeded = :participantsNeeded price = :price"
 			+ "where eno = :eno")
 	void update(@BindBean Event event);
 	

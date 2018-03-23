@@ -4,7 +4,7 @@ public class EventDto {
 	
 	private int id = 0;
 	private String label;
-	private String date;
+	private String dateEvent;
 	private int price;
 	private int participants;
 	
@@ -21,11 +21,11 @@ public class EventDto {
 	public void setLabel(String label) {
 		this.label = label;
 	}
-	public String getDate() {
-		return date;
+	public String getDateEvent() {
+		return dateEvent;
 	}
-	public void setDate(String date) {
-		this.date = date;
+	public void setDateEvent(String date) {
+		this.dateEvent = date;
 	}
 	public int getPrice() {
 		return price;

@@ -5,6 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sqlite.SQLiteDataSource;
 
+import fr.iutinfo.events.EventDao;
+
 import javax.inject.Singleton;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
@@ -32,5 +34,10 @@ public class BDDFactory {
         boolean exist = tables.next();
         tables.close();
         return exist;
+    }
+    
+    public static void initializeBDD() {
+    	EventDao dao = getDbi().open(EventDao.class);
+    	dao.dropEventTable();
     }
 }

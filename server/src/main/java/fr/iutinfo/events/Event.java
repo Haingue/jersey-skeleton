@@ -7,7 +7,7 @@ public class Event {
 	
 	private int eno = 0;
 	private String label;
-	private Timestamp date;
+	private String dateEvent;
 	private int participantsNeeded;
 	private int price;
 	
@@ -16,11 +16,11 @@ public class Event {
 	}
 
 
-	public Event(int eno, String label, Timestamp date, int participantsNeeded, int price) {
+	public Event(int eno, String label, String date, int participantsNeeded, int price) {
 		super();
 		this.eno = eno;
 		this.label = label;
-		this.date = date;
+		this.dateEvent = date;
 		this.participantsNeeded = participantsNeeded;
 		this.price = price;
 	}
@@ -36,14 +36,14 @@ public class Event {
 
 
 
-	public Timestamp getDate() {
-		return date;
+	public String getDateEvent() {
+		return dateEvent;
 	}
 
 
 
-	public void setDate(Timestamp date) {
-		this.date = date;
+	public void setDateEvent(String date) {
+		this.dateEvent = date;
 	}
 
 
@@ -76,7 +76,7 @@ public class Event {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result + ((dateEvent == null) ? 0 : dateEvent.hashCode());
 		result = prime * result + eno;
 		result = prime * result + ((label == null) ? 0 : label.hashCode());
 		result = prime * result + participantsNeeded;
@@ -93,10 +93,10 @@ public class Event {
 		if (getClass() != obj.getClass())
 			return false;
 		Event other = (Event) obj;
-		if (date == null) {
-			if (other.date != null)
+		if (dateEvent == null) {
+			if (other.dateEvent != null)
 				return false;
-		} else if (!date.equals(other.date))
+		} else if (!dateEvent.equals(other.dateEvent))
 			return false;
 		if (eno != other.eno)
 			return false;
@@ -118,13 +118,12 @@ public class Event {
 		dto.setLabel(label);
 		dto.setParticipants(participantsNeeded);
 		dto.setPrice(price);
-		dto.setDate(date.toString());
+		dto.setDateEvent(dateEvent);
 		return dto;
 	}
 	
 	public void initFromDto(EventDto dto) {
-		LocalDateTime date = LocalDateTime.parse(dto.getDate());
-		setDate(Timestamp.valueOf(date));
+		setDateEvent(dto.getDateEvent());
 		setLabel(dto.getLabel());
 		setPrice(dto.getPrice());
 		setEno(dto.getId());

@@ -4,8 +4,6 @@ import static fr.iutinfo.skeleton.api.BDDFactory.getDbi;
 import static fr.iutinfo.skeleton.api.BDDFactory.tableExist;
 
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,9 +26,8 @@ public class EventResource {
     
     public EventResource() throws SQLException {
         if (!tableExist("event")) {
-            dao.createUserTable();
-            Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
-            dao.insert(new Event(0, "Football au complex Lafayette", timestamp,10,5));
+            dao.createEventTable();
+            
         }
     }
     
