@@ -32,6 +32,13 @@ public class User implements Principal {
         this.name = name;
         this.alias = alias;
     }
+    
+    public User(int id, String name, String alias, String password) {
+        this.id = id;
+        this.name = name;
+        this.alias = alias;
+        setPassword(password);
+    }
 
     public User() {
     }
@@ -65,7 +72,7 @@ public class User implements Principal {
     }
 
     public String getPassword() {
-        return this.password;
+        return this.password == null ? this.getPasswdHash() : this.password;
     }
 
     public void setPassword(String password) {
