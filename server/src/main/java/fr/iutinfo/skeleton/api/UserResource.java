@@ -24,7 +24,7 @@ public class UserResource {
         if (!tableExist("users")) {
             logger.debug("Crate table users");
             dao.createUserTable();
-            dao.insert(new User(0, "Margaret Thatcher", "la Dame de fer"));
+            dao.insert(new User(0, "Margaret Thatcher"));
         }
     }
 
@@ -39,9 +39,9 @@ public class UserResource {
     }
 
     @GET
-    @Path("/{name}")
-    public UserDto getUser(@PathParam("name") String name) {
-        User user = dao.findByName(name);
+    @Path("/{id}")
+    public UserDto getUser(@PathParam("id") int id) {
+        User user = dao.findById(id);
         if (user == null) {
             throw new WebApplicationException(404);
         }
@@ -49,9 +49,9 @@ public class UserResource {
     }
     
     @GET
-    @Path("/mails/{email}")
-    public UserDto getUserByMail(@PathParam("email") String email) {
-        User user = dao.findByEmail(email);
+    @Path("/login/{login}")
+    public UserDto getUserByLogin(@PathParam("login") String login) {
+        User user = dao.findByLogin(login);
         if (user == null) {
             throw new WebApplicationException(404);
         }
@@ -71,8 +71,8 @@ public class UserResource {
     }
     
     @GET
-    @Path("/search")
-    public List<UserDto> findUsersByName(String name){
+    @Path("/search/{name}")
+    public List<UserDto> findUsersByName(@PathParam("name") String name){
     	List<User> users;
     	users = dao.search("%" + name + "%");
     	return users.stream().map(User::convertToDto).collect(Collectors.toList());

@@ -8,17 +8,18 @@ import java.security.Principal;
 public class UserDto {
     final static Logger logger = LoggerFactory.getLogger(UserDto.class);
     private String name;
-    private String alias;
+    private String surname;
     private int id = 0;
-    private String email;
+    private String login;
     private String password;
+    private String fonction;
 
-    public String getEmail() {
-        return email;
+    public String getLogin() {
+        return login;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public int getId() {
@@ -45,12 +46,22 @@ public class UserDto {
         this.password = password;
     }
 
-    public String getAlias() {
-        return alias;
-    }
+	public String getSurname() {
+		return surname;
+	}
 
-    public void setAlias(String alias) {
-        this.alias = alias;
-    }
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
+	public String getFonction() {
+		return fonction;
+	}
+
+	public void setFonction(String fonction) {
+		this.fonction = fonction;
+	}
+
+
 
 }
