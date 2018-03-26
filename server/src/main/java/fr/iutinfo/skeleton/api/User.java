@@ -28,17 +28,17 @@ public class User implements Principal {
         this.login = login;
     }
 
-    public User(int id, String login, String name, String surname) {
+    public User(int id, String login, String password, String name, String surname) {
         this.id = id;
         this.login = login;
         this.name = name;
         this.surname = surname;
+        setPassword(password);
     }
     
-    public User(int id, String name, String alias, String password) {
+    public User(int id, String login, String password) {
         this.id = id;
         this.name = name;
-        this.alias = alias;
         setPassword(password);
     }
 
