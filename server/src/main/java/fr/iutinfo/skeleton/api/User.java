@@ -23,6 +23,7 @@ public class User implements Principal {
     private String salt;
     private String search;
     private String profilUrl;
+    private boolean admin = false;
 
     public User(int id, String login) {
         this.id = id;
