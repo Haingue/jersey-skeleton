@@ -22,23 +22,20 @@ public class User implements Principal {
     private String passwdHash;
     private String salt;
     private String search;
+    private String profilUrl;
 
     public User(int id, String login) {
         this.id = id;
         this.login = login;
     }
 
-    public User(int id, String login, String password, String name, String surname) {
+    public User(int id, String login, String name, String surname, String fonction, String profilUrl) {
         this.id = id;
         this.login = login;
         this.name = name;
         this.surname = surname;
-        setPassword(password);
-    }
-    
-    public User(int id, String login, String password) {
-        this.id = id;
-        this.name = name;
+        this.fonction = fonction;
+        this.profilUrl = profilUrl;
         setPassword(password);
     }
 
@@ -106,7 +103,15 @@ public class User implements Principal {
     
     
 
-    public String getSurname() {
+    public String getProfilUrl() {
+		return profilUrl;
+	}
+
+	public void setProfilUrl(String profilUrl) {
+		this.profilUrl = profilUrl;
+	}
+
+	public String getSurname() {
 		return surname;
 	}
 
@@ -124,7 +129,9 @@ public class User implements Principal {
 
 	
     
-    @Override
+   
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -134,6 +141,7 @@ public class User implements Principal {
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((passwdHash == null) ? 0 : passwdHash.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((profilUrl == null) ? 0 : profilUrl.hashCode());
 		result = prime * result + ((salt == null) ? 0 : salt.hashCode());
 		result = prime * result + ((search == null) ? 0 : search.hashCode());
 		result = prime * result + ((surname == null) ? 0 : surname.hashCode());
@@ -175,6 +183,11 @@ public class User implements Principal {
 			if (other.password != null)
 				return false;
 		} else if (!password.equals(other.password))
+			return false;
+		if (profilUrl == null) {
+			if (other.profilUrl != null)
+				return false;
+		} else if (!profilUrl.equals(other.profilUrl))
 			return false;
 		if (salt == null) {
 			if (other.salt != null)
@@ -247,6 +260,7 @@ public class User implements Principal {
         this.setSurname(dto.getSurname());
         this.setFonction(dto.getFonction());
         this.setPassword(dto.getPassword());
+        this.setProfilUrl(dto.getProfilUrl());
     }
 
     public UserDto convertToDto() {
@@ -257,6 +271,7 @@ public class User implements Principal {
         dto.setName(this.getName());
         dto.setFonction(this.getFonction());
         dto.setPassword(this.getPassword());
+        dto.setProfilUrl(this.getProfilUrl());
         return dto;
     }
 }

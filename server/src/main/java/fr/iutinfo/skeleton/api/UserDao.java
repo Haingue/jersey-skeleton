@@ -13,10 +13,12 @@ public interface UserDao {
     		+ " login varchar(100),"
     		+ " passwdHash varchar(64),"
     		+ " salt varchar(64),"
+    		+ " profilUrl varchar(1024),"
     		+ " search varchar(1024))")
     void createUserTable();
 
-    @SqlUpdate("insert into users (name,surname,login, passwdHash, salt, search) values (:name, :surname, :login, :passwdHash, :salt, :search)")
+    @SqlUpdate("insert into users (name,surname,login, passwdHash, salt, profilUrl search) "
+    		+ "values (:name, :surname, :login, :passwdHash, :salt, :profilUrl :search)")
     @GetGeneratedKeys
     int insert(@BindBean() User user);
 

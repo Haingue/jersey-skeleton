@@ -13,6 +13,7 @@ public class UserDto {
     private String login;
     private String password;
     private String fonction;
+    private String profilUrl;
 
     public String getLogin() {
         return login;
@@ -61,6 +62,16 @@ public class UserDto {
 	public void setFonction(String fonction) {
 		this.fonction = fonction;
 	}
+
+	public String getProfilUrl() {
+		return profilUrl;
+	}
+
+	public void setProfilUrl(String profilUrl) {
+		this.profilUrl = profilUrl;
+	}
+	
+	
 
 
 
