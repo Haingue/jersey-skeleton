@@ -77,6 +77,14 @@ public class UserResource {
     	users = dao.search("%" + name + "%");
     	return users.stream().map(User::convertToDto).collect(Collectors.toList());
     }
+    
+    @GET
+    @Path("/search/{name}")
+    public List<UserDto> findUsersByNamePathParam(@PathParam("name") String name){
+    	List<User> users;
+    	users = dao.search("%" + name + "%");
+    	return users.stream().map(User::convertToDto).collect(Collectors.toList());
+    }
 
     @DELETE
     @Path("/{id}")

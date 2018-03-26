@@ -13,7 +13,7 @@ import javax.ws.rs.core.SecurityContext;
 @Path("/")
 public class LoginResource {
     final static Logger logger = LoggerFactory.getLogger(LoginResource.class);
-
+    
     @GET
     @Path("/login")
     public UserDto secureWhoAmI(@Context SecurityContext context) {
