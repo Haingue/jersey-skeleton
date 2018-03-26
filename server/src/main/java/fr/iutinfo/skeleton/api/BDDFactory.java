@@ -37,7 +37,6 @@ public class BDDFactory {
     }
     
     public static void initializeBDD() {
-    	EventDao dao = getDbi().open(EventDao.class);
-    	dao.dropEventTable();
+    	
     }
 }
