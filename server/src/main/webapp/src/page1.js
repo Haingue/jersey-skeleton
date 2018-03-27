@@ -3,8 +3,18 @@ $(document).ready(function(){
     $("#pageIdentifier").hide();
     $("#confirmer").hide();
     $("#Accueil").hide();
+    $("#PageAdmin").hide();
 
 
+    //TRANSITION PAGE ADMIN
+    function transitionAdmin(){
+    $("#page1").hide();
+    $("#PageAdmin").show();
+    $("#listUser").show();
+    $("#listEvent").show();
+    $("#listformu").show();
+
+    }
 
     //Fonction transition
     function transitionId(){
@@ -26,17 +36,15 @@ $(document).ready(function(){
 
     
     // Inscription
-    $("#confirmerE").click(function(){
+    $("#creerutil").click(function(){
 	postUser(
-            $('#nom').val(),
-            $('#prenom').val(),   
-            $('#email').val(),
-            $('#passwd').val())
-        $("#pageEnregistrer").hide();
-        $("#page1").hide();
-        $("#Acceuil").hide();
-        $("#pageIdentifier").show();
-
+            $('#nomform').val(),
+            $('#prenomform').val(),   
+            $('#mailform').val(),
+            $('#mdpform').val()
+            )
+            listerUsers();
+            listerUsers();
 
 	});
 	
@@ -44,6 +52,18 @@ $(document).ready(function(){
 	$("#confirmerI").click(function(){
 		login();
 	});
+
+
+
+
+
+
+
+
+
+
+
+    /* CODE DE L ANCIENNE PAGE
     $("#profil").click(function(){
         $("#titre1").show();
         $("#titre2").hide();
@@ -98,7 +118,7 @@ $(document).ready(function(){
     });
 	
 
-
+*/
 });
 
 
