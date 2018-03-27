@@ -13,7 +13,9 @@ public class UserDto {
     private String login;
     private String password;
     private String fonction;
-    private String profilUrl;
+    
+
+	private String profilUrl;
 
     public String getLogin() {
         return login;

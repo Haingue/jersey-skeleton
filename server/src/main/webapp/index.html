@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    
     <div id=decor>
       <img id=bordgauche src="Images/imageCourse.jpg">
       <img id=borddroit src="Images/imageCourse.jpg">
@@ -16,7 +15,7 @@
       <img id=logo src="Images/Sport-In Logo.png"/>
       <h2 id=premierh2>Le networking par le sport</h2>
       <h2>Le networking pour le sport</h2>
-      <input type=button id="enregistrer" value="S'enregistrer" >
+      <!-- <input type=button id="enregistrer" value="S'enregistrer" > -->
       <input type=button id="identifier" value="S'identifier">
     </div>
 
@@ -46,6 +45,26 @@
 	<a href="" id=rE>Retour</a>
 	
       </div>
+
+      <div id=PageAdmin>
+      	<h1>Page Admin</h1>
+      	<div id=listUser>
+      		<h2>Liste utilisateurs</h2>
+      	</div>
+      	<div id=listEvent>
+      		<h2>Liste Evenement</h2>
+      	</div>
+      	<div id=formu>
+      		<form>
+      			<input type=text id=nomform placeholder="Nom utilisateur">
+      			<input type=text id=prenomform placeholder="Prenom utilisateur">
+      			<input type=text id=mailform placeholder="Mail utilisateur">
+      			<input type=text id=mdpform placeholder="Mot de passe utilisateur">
+      			<input type=button id=creerutil value="Creer un utilisateur">
+      		</form>
+      	</div>
+      </div>
+
       <div id=Accueil>
 	<div id=Menu>
 	  <img id=logo2 src="Images/Sport-In LogoB.png"/>
@@ -94,13 +113,9 @@
 	</div>
 
       </div>
-
-
-
-
+      <script src="./src/all.js"></script>
       <script src="./src/Accueil.js"></script>
       <script src="./src/page1.js"></script>
-      <script src="./src/all.js"></script>
   </body>
 </html>
 

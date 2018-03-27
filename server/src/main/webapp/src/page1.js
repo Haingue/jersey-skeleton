@@ -24,10 +24,6 @@ $(document).ready(function(){
 	transitionId();			
     });
 
-
-    $("#creerEventButton").click(){
-       
-    }
     
     // Inscription
     $("#confirmerE").click(function(){
@@ -46,33 +42,7 @@ $(document).ready(function(){
 	
 	// Identification
 	$("#confirmerI").click(function(){
-		login()
-        /*
-    $("#Accueil").show();
-    $("#switch").show();
-    $("#titre3").show();
-    $("#eventboard").show();
-    $("#Menu").show();
-    $("#logo2").show();
-    $("#profil").show();
-    $("#programme").show();
-    $("#eventdispo").show();
-    $("#settings").show();
-    
-
-    $("#bordgauche").hide();
-    $("#borddroit").hide();
-    $("#pageEnregistrer").hide();   
-    $("#pageIdentifier").hide();
-    $("#confirmer").hide();
-    $("#profilpage").hide();
-    $("#titre1").hide();
-    $("#titre2").hide();
-    $("#titre4").hide();
-    $("#creerevent").hide();
-    $("#pageprofil").hide();
-    $("#pagereglage").hide();
-    */
+		login();
 	});
     $("#profil").click(function(){
         $("#titre1").show();
@@ -125,9 +95,6 @@ $(document).ready(function(){
         $("#pagereglage").hide();
         $("#eventboard").hide();
         $("#creerevent").show();
-    });
-    $("#uploadlinkd").click(function(){
-        
     });
 	
 

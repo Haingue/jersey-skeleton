@@ -23,9 +23,11 @@ public class User implements Principal {
     private String salt;
     private String search;
     private String profilUrl;
-    private boolean admin = false;
+    
 
-    public User(int id, String login) {
+
+
+	public User(int id, String login) {
         this.id = id;
         this.login = login;
     }
@@ -87,6 +89,7 @@ public class User implements Principal {
     }
 
     public boolean isGoodPassword(String password) {
+    	
         if (isAnonymous()) {
             return false;
         }

@@ -1,3 +1,5 @@
+
+
 function getUser(name) {
 	getUserGeneric(name, "v1/user/");
 }
@@ -9,8 +11,7 @@ function getUserGeneric(name, url) {
 }
 
 function login() {
-	getWithAuthorizationHeader("v1/login", function(data){
-	    //$("#login_form").hide();
+	getWithAuthorizationHeader("v1/user", function(data){
 	    afficheUser(data);
 	});
 }
@@ -30,9 +31,9 @@ function profile() {
         req.setRequestHeader("Authorization", "Basic " + btoa($("#userlogin").val() + ":" + $("#passwdlogin").val()));
        },
        success: function(){
-      // 	if(user.id != -1){
-       	$("#pageIdentifier").hide();
-       	$("#pageEnregistrer").hide();	
+      alert('Authentification OK');
+      $("#pageIdentifier").hide();
+      $("#pageEnregistrer").hide();	
     	$("#confirmer").hide();
     	$("#logo").hide();
     	$("#bordgauche").hide();
@@ -45,12 +46,10 @@ function profile() {
     	$("#programme").show();
     	$("#eventdispo").show();
     	$("#settings").show();
-
-      // }
-  	}
+    }
    	,callback,
        error : function(jqXHR, textStatus, errorThrown) {
-       			alert('error: ' + textStatus);
+       			alert('Mauvais login/password');
        		}
      });
      } else {
@@ -71,11 +70,11 @@ function postEventGeneric(label,date,price,participants,url){
 		url : url,
 		dataType : "json",
 		data : JSON.stringify({
-			"id" : 0,
 			"label" : label,
 			"date" : date,
 			"price" : price,
-			"participants" : participants
+			"participants" : participants,
+			"id" : 0
 		}),
 
 	});
@@ -140,6 +139,43 @@ function afficheListUsers(data) {
 }
 
 function userStringify(user) {
-    return user.uno + ". " + user.nom + " &lt;" + user.login + "&gt;" + " (" + user.prenom + ")";
+    return user.uno + ". " + user.nom + " &lt;" + user.login + "&gt;" 
+    + " (" + user.prenom + ")";
 }
+
+/*
+function listerEvents(){
+	$.ajax({
+    // The URL for the request
+    url: "/v1/events",
+
+    // Whether this is a POST/GET/UPDATE/DELETE request
+    type: "GET",
+    // The type of data we expect back
+    dataType : "json",
+    // Code to run if the request succeeds;
+    // the response is passed to the function
+    success: function( json ) {
+    
+        $('#eventboard').children("li").remove();
+       
+		$.each(json, function(i,event){
+			$('#eventboard').append("<li>" + event.label + " Nombre de de participants: "+ event.participants+" Prix: "+ event.price +" Date :"+event.date  +"</li>");
+        });
+        
+    },
+    // Code to run if the request fails; the raw request and
+    // status codes are passed to the function
+    error: function( xhr, status, errorThrown ) {
+        alert( "Erreur dans l'affichage des livres" );
+        console.log( "Error: " + errorThrown );
+        console.log( "Status: " + status );
+        console.dir( xhr );
+    },
+  
+    complete: function( xhr, status ) {
+
+    }
+  });
+  */
 

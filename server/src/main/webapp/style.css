@@ -139,6 +139,36 @@ width:auto;
 	width:auto;
 }
 
+h1{
+	text-align:center;
+	color: rgb(210,10,65);
+	margin-right: 15%;
+}
+#listUser{
+	float:left;
+	margin-left: 4em;
+	margin-right: 5em;
+	width: auto;
+}
+
+#listEvent{
+	float:right;
+	margin-left: 5em;
+	margin-right: 5em;
+	width: auto;
+}
+
+#formu{
+
+	margin-top: 3em;
+	width:  auto;
+	display: block;
+
+}
+
+
+
+
 
 
 /* ///////POLICE:
