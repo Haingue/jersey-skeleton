@@ -3,8 +3,18 @@ $(document).ready(function(){
     $("#pageIdentifier").hide();
     $("#confirmer").hide();
     $("#Accueil").hide();
+    $("#PageAdmin").hide();
 
 
+    //TRANSITION PAGE ADMIN
+    function transitionAdmin(){
+    $("#page1").hide();
+    $("#PageAdmin").show();
+    $("#listUser").show();
+    $("#listEvent").show();
+    $("#listformu").show();
+
+    }
 
     //Fonction transition
     function transitionId(){
@@ -24,56 +34,36 @@ $(document).ready(function(){
 	transitionId();			
     });
 
-
-    $("#creerEventButton").click(){
-       
-    }
     
     // Inscription
-    $("#confirmerE").click(function(){
+    $("#creerutil").click(function(){
 	postUser(
-            $('#nom').val(),
-            $('#prenom').val(),   
-            $('#email').val(),
-            $('#passwd').val())
-        $("#pageEnregistrer").hide();
-        $("#page1").hide();
-        $("#Acceuil").hide();
-        $("#pageIdentifier").show();
-
+            $('#nomform').val(),
+            $('#prenomform').val(),   
+            $('#mailform').val(),
+            $('#mdpform').val()
+            )
+            listerUsers();
+            listerUsers();
 
 	});
 	
 	// Identification
 	$("#confirmerI").click(function(){
-		login()
-        /*
-    $("#Accueil").show();
-    $("#switch").show();
-    $("#titre3").show();
-    $("#eventboard").show();
-    $("#Menu").show();
-    $("#logo2").show();
-    $("#profil").show();
-    $("#programme").show();
-    $("#eventdispo").show();
-    $("#settings").show();
-    
-
-    $("#bordgauche").hide();
-    $("#borddroit").hide();
-    $("#pageEnregistrer").hide();   
-    $("#pageIdentifier").hide();
-    $("#confirmer").hide();
-    $("#profilpage").hide();
-    $("#titre1").hide();
-    $("#titre2").hide();
-    $("#titre4").hide();
-    $("#creerevent").hide();
-    $("#pageprofil").hide();
-    $("#pagereglage").hide();
-    */
+		login();
 	});
+
+
+
+
+
+
+
+
+
+
+
+    /* CODE DE L ANCIENNE PAGE
     $("#profil").click(function(){
         $("#titre1").show();
         $("#titre2").hide();
@@ -126,12 +116,9 @@ $(document).ready(function(){
         $("#eventboard").hide();
         $("#creerevent").show();
     });
-    $("#uploadlinkd").click(function(){
-        
-    });
 	
 
-
+*/
 });
 
 

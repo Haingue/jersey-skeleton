@@ -37,6 +37,22 @@ public class BDDFactory {
     }
     
     public static void initializeBDD() {
-    	
+    	UserDao dao = getDbi().open(UserDao.class);
+    	try {
+    	if(!tableExist("users")) {
+    		dao.createUserTable();
+    		User user = new User(0,"admin");
+    		user.setPassword("admin");
+    		dao.insert(user);
+    	}else {
+    		dao.dropUserTable();
+    		dao.createUserTable();
+    		User user = new User(0,"admin");
+    		user.setPassword("admin");
+    		dao.insert(user);
+    	}
+    	}catch(SQLException e) {
+    		
+    	}
     }
 }
