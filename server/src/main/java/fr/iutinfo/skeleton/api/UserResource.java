@@ -14,6 +14,11 @@ import java.util.stream.Collectors;
 import static fr.iutinfo.skeleton.api.BDDFactory.getDbi;
 import static fr.iutinfo.skeleton.api.BDDFactory.tableExist;
 
+/**
+ * Classe qui defini comment le serveur doit manipuler des User.
+ * @author haingue
+ *
+ */
 @Path("/user")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)

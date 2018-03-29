@@ -1,20 +1,22 @@
 package fr.iutinfo.events;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-
+/**
+ * Classe qui represente un evenement.
+ * 
+ * @author equipe3
+ *
+ */
 public class Event {
-	
+
 	private int eno = 0;
 	private String label;
 	private String dateEvent;
 	private int participantsNeeded;
 	private int price;
-	
+
 	public Event() {
 		// TODO Auto-generated constructor stub
 	}
-
 
 	public Event(int eno, String label, String date, int participantsNeeded, int price) {
 		super();
@@ -25,7 +27,6 @@ public class Event {
 		this.price = price;
 	}
 
-
 	public int getEno() {
 		return eno;
 	}
@@ -34,19 +35,13 @@ public class Event {
 		this.eno = eno;
 	}
 
-
-
 	public String getDateEvent() {
 		return dateEvent;
 	}
 
-
-
 	public void setDateEvent(String date) {
 		this.dateEvent = date;
 	}
-
-
 
 	public int getParticipantsNeeded() {
 		return participantsNeeded;
@@ -71,7 +66,7 @@ public class Event {
 	public void setLabel(String label) {
 		this.label = label;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -112,6 +107,12 @@ public class Event {
 		return true;
 	}
 
+	/**
+	 * Permet de convertir une Instance Event en Instance EventDto pour faciliter le
+	 * transfert de donnee.
+	 * 
+	 * @return
+	 */
 	public EventDto convertToDto() {
 		EventDto dto = new EventDto();
 		dto.setId(eno);
@@ -121,7 +122,13 @@ public class Event {
 		dto.setDateEvent(dateEvent);
 		return dto;
 	}
-	
+
+	/**
+	 * Permet d'initaliser un Event a partir d'une instance d'EventDto, sert a la
+	 * reception de donnee.
+	 * 
+	 * @param dto
+	 */
 	public void initFromDto(EventDto dto) {
 		setDateEvent(dto.getDateEvent());
 		setLabel(dto.getLabel());
@@ -129,7 +136,5 @@ public class Event {
 		setEno(dto.getId());
 		setParticipantsNeeded(dto.getParticipants());
 	}
-	
-	
 
 }

@@ -1,15 +1,21 @@
 package fr.iutinfo.events;
 
+/**
+ * Cette classe est pas très utile, elle represente l'association entre un
+ * evennement et un utilisateur, elle aurait peu etre eviter en modifiant la
+ * classe User ou Event...
+ * 
+ * @author equipe3
+ *
+ */
 public class JoinedEvent {
-	
+
 	private int user_id;
 	private int event_eno;
-	
+
 	public JoinedEvent() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	
 
 	@Override
 	public int hashCode() {
@@ -19,8 +25,6 @@ public class JoinedEvent {
 		result = prime * result + user_id;
 		return result;
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -38,8 +42,6 @@ public class JoinedEvent {
 		return true;
 	}
 
-
-
 	public int getUser_id() {
 		return user_id;
 	}
@@ -55,7 +57,5 @@ public class JoinedEvent {
 	public void setEvent_eno(int event_eno) {
 		this.event_eno = event_eno;
 	}
-	
-	
 
 }

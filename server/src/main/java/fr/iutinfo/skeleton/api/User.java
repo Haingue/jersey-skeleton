@@ -10,100 +10,104 @@ import org.slf4j.LoggerFactory;
 import java.security.Principal;
 import java.security.SecureRandom;
 
+/**
+ * Classe qui represente un utilisateur
+ * 
+ * @author equipe3
+ *
+ */
 public class User implements Principal {
-    final static Logger logger = LoggerFactory.getLogger(User.class);
-    private static User anonymous = new User(-1, "anonym");
-    private String name;
-    private String surname;
-    private int id = 0;
-    private String login;
-    private String fonction;
-    private String password;
-    private String passwdHash;
-    private String salt;
-    private String search;
-    private String profilUrl;
+	final static Logger logger = LoggerFactory.getLogger(User.class);
+	private static User anonymous = new User(-1, "anonym");
+	private String name;
+	private String surname;
+	private int id = 0;
+	private String login;
+	private String fonction;
+	private String password;
+	private String passwdHash;
+	private String salt;
+	private String search;
+	private String profilUrl;
 
-    public User(int id, String login) {
-        this.id = id;
-        this.login = login;
-    }
+	public User(int id, String login) {
+		this.id = id;
+		this.login = login;
+	}
 
-    public User(int id, String login, String name, String surname, String fonction, String profilUrl) {
-        this.id = id;
-        this.login = login;
-        this.name = name;
-        this.surname = surname;
-        this.fonction = fonction;
-        this.profilUrl = profilUrl;
-        setPassword(password);
-    }
+	public User(int id, String login, String name, String surname, String fonction, String profilUrl) {
+		this.id = id;
+		this.login = login;
+		this.name = name;
+		this.surname = surname;
+		this.fonction = fonction;
+		this.profilUrl = profilUrl;
+		setPassword(password);
+	}
 
-    public User() {
-    }
+	public User() {
+	}
 
-    public static User getAnonymousUser() {
-        return anonymous;
-    }
+	public static User getAnonymousUser() {
+		return anonymous;
+	}
 
-    public String getLogin() {
-        return login;
-    }
+	public String getLogin() {
+		return login;
+	}
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
+	public void setLogin(String login) {
+		this.login = login;
+	}
 
-    public int getId() {
-        return id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getPassword() {
-        return this.password == null ? this.getPasswdHash() : this.password;
-    }
+	public String getPassword() {
+		return this.password == null ? this.getPasswdHash() : this.password;
+	}
 
-    public void setPassword(String password) {
-        passwdHash = buildHash(password, getSalt());
-        this.password = password;
-    }
+	public void setPassword(String password) {
+		passwdHash = buildHash(password, getSalt());
+		this.password = password;
+	}
 
-    private String buildHash(String password, String s) {
-        Hasher hasher = Hashing.sha256().newHasher();
-        hasher.putString(password + s, Charsets.UTF_8);
-        return hasher.hash().toString();
-    }
+	private String buildHash(String password, String s) {
+		Hasher hasher = Hashing.sha256().newHasher();
+		hasher.putString(password + s, Charsets.UTF_8);
+		return hasher.hash().toString();
+	}
 
-    public boolean isGoodPassword(String password) {
-        if (isAnonymous()) {
-            return false;
-        }
-        String hash = buildHash(password, getSalt());
-        return hash.equals(getPasswdHash());
-    }
+	public boolean isGoodPassword(String password) {
+		if (isAnonymous()) {
+			return false;
+		}
+		String hash = buildHash(password, getSalt());
+		return hash.equals(getPasswdHash());
+	}
 
-    public String getPasswdHash() {
-        return passwdHash;
-    }
+	public String getPasswdHash() {
+		return passwdHash;
+	}
 
-    public void setPasswdHash(String passwdHash) {
-        this.passwdHash = passwdHash;
-    }
-    
-    
+	public void setPasswdHash(String passwdHash) {
+		this.passwdHash = passwdHash;
+	}
 
-    public String getProfilUrl() {
+	public String getProfilUrl() {
 		return profilUrl;
 	}
 
@@ -126,10 +130,6 @@ public class User implements Principal {
 	public void setFonction(String fonction) {
 		this.fonction = fonction;
 	}
-
-	
-    
-   
 
 	@Override
 	public int hashCode() {
@@ -208,70 +208,82 @@ public class User implements Principal {
 	}
 
 	@Override
-    public String toString() {
-        return id + ": " + surname + ", " + name + " <" + login + ">";
-    }
+	public String toString() {
+		return id + ": " + surname + ", " + name + " <" + login + ">";
+	}
 
-    public String getSalt() {
-        if (salt == null) {
-            salt = generateSalt();
-        }
-        return salt;
-    }
+	public String getSalt() {
+		if (salt == null) {
+			salt = generateSalt();
+		}
+		return salt;
+	}
 
-    public void setSalt(String salt) {
-        this.salt = salt;
-    }
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
 
-    private String generateSalt() {
-        SecureRandom random = new SecureRandom();
-        Hasher hasher = Hashing.sha256().newHasher();
-        hasher.putLong(random.nextLong());
-        return hasher.hash().toString();
-    }
+	private String generateSalt() {
+		SecureRandom random = new SecureRandom();
+		Hasher hasher = Hashing.sha256().newHasher();
+		hasher.putLong(random.nextLong());
+		return hasher.hash().toString();
+	}
 
-    public void resetPasswordHash() {
-        if (password != null && !password.isEmpty()) {
-            setPassword(getPassword());
-        }
-    }
+	public void resetPasswordHash() {
+		if (password != null && !password.isEmpty()) {
+			setPassword(getPassword());
+		}
+	}
 
-    public boolean isInUserGroup() {
-        return !(id == anonymous.getId());
-    }
+	public boolean isInUserGroup() {
+		return !(id == anonymous.getId());
+	}
 
-    public boolean isAnonymous() {
-        return this.getId() == getAnonymousUser().getId();
-    }
+	public boolean isAnonymous() {
+		return this.getId() == getAnonymousUser().getId();
+	}
 
-    public String getSearch() {
-        search = name + " " + surname + " " + login;
-        return search;
-    }
+	public String getSearch() {
+		search = name + " " + surname + " " + login;
+		return search;
+	}
 
-    public void setSearch(String search) {
-        this.search = search;
-    }
+	public void setSearch(String search) {
+		this.search = search;
+	}
 
-    public void initFromDto(UserDto dto) {
-        this.setLogin(dto.getLogin());
-        this.setId(dto.getId());
-        this.setName(dto.getName());
-        this.setSurname(dto.getSurname());
-        this.setFonction(dto.getFonction());
-        this.setPassword(dto.getPassword());
-        this.setProfilUrl(dto.getProfilUrl());
-    }
+	/**
+	 * Permet d'initaliser un utilisateur a partir d'une instance d'UserDto, sert a
+	 * la reception de donnee.
+	 * 
+	 * @param dto
+	 */
+	public void initFromDto(UserDto dto) {
+		this.setLogin(dto.getLogin());
+		this.setId(dto.getId());
+		this.setName(dto.getName());
+		this.setSurname(dto.getSurname());
+		this.setFonction(dto.getFonction());
+		this.setPassword(dto.getPassword());
+		this.setProfilUrl(dto.getProfilUrl());
+	}
 
-    public UserDto convertToDto() {
-        UserDto dto = new UserDto();
-        dto.setLogin(this.getLogin());
-        dto.setSurname(this.getSurname());
-        dto.setId(this.getId());
-        dto.setName(this.getName());
-        dto.setFonction(this.getFonction());
-        dto.setPassword(this.getPassword());
-        dto.setProfilUrl(this.getProfilUrl());
-        return dto;
-    }
+	/**
+	 * Permet de convertir une Instance User en Instance UserDto pour faciliter le
+	 * transfert de donnee.
+	 * 
+	 * @return
+	 */
+	public UserDto convertToDto() {
+		UserDto dto = new UserDto();
+		dto.setLogin(this.getLogin());
+		dto.setSurname(this.getSurname());
+		dto.setId(this.getId());
+		dto.setName(this.getName());
+		dto.setFonction(this.getFonction());
+		dto.setPassword(this.getPassword());
+		dto.setProfilUrl(this.getProfilUrl());
+		return dto;
+	}
 }

@@ -5,6 +5,12 @@ import org.slf4j.LoggerFactory;
 
 import java.security.Principal;
 
+/**
+ * Classe qui sert a la communication client/serveur d'utilisateur.
+ * 
+ * @author equipe3
+ *
+ */
 public class UserDto {
     final static Logger logger = LoggerFactory.getLogger(UserDto.class);
     private String name;

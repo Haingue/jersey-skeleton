@@ -17,6 +17,11 @@ public class JoinedEventResource {
 		}
 	}
 	
+	/**
+	 * Permet d'ajouter un utilisateur a un evenement.
+	 * @param dto
+	 * @return
+	 */
 	@POST
 	@RolesAllowed("user")
 	public JoinedEventDto joinEvent(JoinedEventDto dto) {

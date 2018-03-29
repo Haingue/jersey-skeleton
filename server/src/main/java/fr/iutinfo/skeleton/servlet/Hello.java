@@ -9,6 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * 
+ * @deprecated inutilise
+ * @author haingue
+ *
+ */
 @WebServlet(name = "testServlet", urlPatterns = {"/hello"}, initParams = {@WebInitParam(name = "simpleParam", value = "paramValue")})
 public class Hello extends HttpServlet {
 
